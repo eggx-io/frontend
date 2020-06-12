@@ -1,0 +1,49 @@
+<app-navbar></app-navbar>
+<h1 class="page-title">Events</h1>
+
+<div class="content">
+  <div class="list">
+    <div class="event bg-secondary-light" *ngFor="let event of events">
+      <h2>{{event.title}}</h2>
+      <p class="blurb">{{event.blurb}}</p>
+      <div class="schedule">
+        <i class="material-icons color-teal">event</i>
+        <span>{{event.schedule.start | date}}</span>
+        <span *ngIf="event.schedule.end != event.schedule.start">
+          &mdash;
+          <span>{{event.schedule.end | date}}</span>
+        </span>
+      </div>
+      <div class="bottom">
+        <button class="btn-primary" (click)="showEvent(event._id)">
+          Show more
+        </button>
+        <span [ngClass]="['event-type', getEventTypeClass(event.type)]">{{event.type}}</span>
+      </div>
+    </div>
+  </div>
+  <div class="search">
+    <div class="form">
+      <h3>Filter events</h3>
+      <label>Event Type</label>
+      <div class="group">
+        <div class="btn">General</div>
+        <div class="btn">Sponsored</div>
+        <div class="btn">Workshops</div>
+      </div>
+      <label>Date</label>
+      <div class="list">
+        <div class="item">
+          <label for="dateFrom">From: </label>
+          <!-- <input [matDatepicker]="dateFrom">
+          <mat-datepicker #dateFrom></mat-datepicker> -->
+        </div>
+      </div>
+    </div>
+    <!-- 
+      type
+      schedule
+      people
+     -->
+  </div>
+</div>

@@ -1,0 +1,44 @@
+@import url('../../styles/host.css');
+
+.list {
+  display: flex;
+  flex-grow: 6;
+  flex-direction: column;
+}
+
+.list .event {
+  display: flex;
+  width: 75%;
+  padding: 15px 20px;
+  flex-direction: column;
+  border-radius: 5px;
+}
+
+.list .event + .event {
+  margin-top: 30px;
+}
+
+.list .event .schedule {
+  display: flex;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.list .event .schedule > * + * {
+  margin-left: 5px;
+}
+
+.list .event .bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list .event .bottom .event-type {
+  margin-right: 10px;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.search {
+  flex-grow: 4;
+}

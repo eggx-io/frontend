@@ -1,0 +1,36 @@
+@import url('../../styles/host.css');
+
+.group {
+  display: inline-flex;
+  margin-bottom: 25px;
+  margin-left: 20px;
+}
+
+.group span {
+  cursor: pointer;
+}
+
+.person {
+  display: flex;
+  box-sizing: content-box;
+  width: 75%;
+  height: 100px;
+  padding: 15px 20px;
+}
+
+.person img {
+  width: 100px;
+  margin-right: 10px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.person .text {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+.person + .person {
+  margin-top: 15px;
+}
