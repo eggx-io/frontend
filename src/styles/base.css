@@ -13,6 +13,7 @@
   font-family: "Open Sans", "Montserrat", sans-serif;
   scroll-behavior: smooth;
   box-sizing: border-box;
+  color: var(--color-primary);
 }
 
 a {
@@ -75,6 +76,7 @@ button.bg-accent:hover {
 button i {
   margin-right: 5px;
   font-size: 16px !important;
+  cursor: pointer !important;
 }
 
 code {
@@ -83,36 +85,32 @@ code {
   border-radius: 2px;
 }
 
-footer {
-  display: flex;
-  margin: 20px;
-  justify-content: center;
-  text-align: center;
-  color: #919191;
+h1, h2, h3, h4 {
+  color: var(--color-black);
 }
 
 h1 {
   margin-top: 10px;
   margin-bottom: 5px;
-  font: 700 38px "Montserrat", "Gotham Bold", sans-serif;
+  font: 700 38px "Montserrat", "Gotham Bold", sans-serif !important;
 }
 
 h2 {
   margin-top: 0;
   margin-bottom: 5px;
-  font: 600 24px "Gotham Light Regular", sans-serif;
+  font: 600 24px "Gotham Light Regular", sans-serif !important;
 }
 
 h3 {
   min-width: 100%;
   margin-top: 0px !important;
   margin-bottom: 5px !important;
-  font: 700 16px "Gotham Light Regular", "Montserrat", sans-serif;
+  font: 700 16px "Gotham Light Regular", "Montserrat", sans-serif !important;
 }
 
 h4 {
   margin: 0;
-  font-size: 18px;
+  font-size: 18px !important;
 }
 
 input {
@@ -256,18 +254,18 @@ ul {
   justify-content: center;
 }
 
-#infoPopup .body {
-  width: 50%;
-}
-
 #infoPopup .info-popup {
   display: flex;
-  width: 100%;
+  width: 70%;
+  min-height: 70%;
   margin-bottom: 20px;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  border: 0.5px solid #0d47a1;
   border-radius: 10px;
+  background-color: var(--bg-primary);
+  box-shadow: var(--drop-shadow-strong);
 }
 
 #infoPopup .info-popup i {
@@ -280,8 +278,14 @@ ul {
   padding: 7px 10px 0 10px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  justify-content: flex-end;
   font-size: 18px;
+}
+
+#infoPopup .info-popup .header h1,
+#infoPopup .info-popup .header h2,
+#infoPopup .info-popup .header h3,
+#infoPopup .info-popup .header h4 {
+  color: #3f51b5;
 }
 
 #infoPopup .info-popup .header + .text {
@@ -290,7 +294,8 @@ ul {
 
 #infoPopup .info-popup .text {
   width: 100%;
-  padding: 30px 10% 20px 10%;
+  margin-top: 20px;
+  padding: 30px 20px 20px 15px;
   font-size: 16px;
 }
 
@@ -311,19 +316,18 @@ ul {
   flex-direction: column;
 }
 
+.page .page-title {
+  margin-top: 0;
+  padding: 30px 3vw 10px 3vw;
+  background-color: var(--bg-accent);
+}
+
 .page .content {
   display: flex;
   flex-grow: 1;
   margin: 25px 0 25px 0;
   padding: 0 2.5vw 0 2.5vw;
   flex-direction: column;
-}
-
-.page .page-title {
-  margin-top: 0;
-  padding: 30px 2.5vw 10px 2.5vw;
-  background-color: var(--bg-accent);
-  font: 700 42px "Montserrat", "Gotham Bold", sans-serif;
 }
 
 /* ================= variables ======================= */
@@ -336,6 +340,7 @@ ul {
   --bg-secondary-light: #fafafa;
   --bg-secondary-strong: #989898;
   --bg-muted: #e0e0e0;
+  --bg-darker: #4d4d4d;
   --border-accent: 1px solid var(--color-accent) !important;
   --border-red: 1px solid var(--color-red);
   --color-accent: #fade04 !important;
@@ -349,6 +354,9 @@ ul {
   --color-red: #f44336;
   --color-teal: #16c3c4;
   --color-teal-darker: #18a7a8;
+  --drop-shadow: 1px 1px 3px rgba(99, 99, 99, 0.5);
+  --drop-shadow-light: 1px 1px 3px rgba(122, 122, 122, 0.3);
+  --drop-shadow-strong: 1px 1px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* =================== themeing ====================== */
@@ -571,7 +579,7 @@ ul {
 
 /* =============================================== */
 
-.popupContainer {
+.popup-container {
   width: 100%;
   height: 100%;
   position: fixed;
@@ -602,8 +610,18 @@ ul {
   overflow: hidden;
 }
 
+.popup .header .title {
+  flex-grow: 1;
+}
+
+.popup .header button {
+  height: fit-content;
+}
+
 .popup .body {
   display: flex;
+  width: 100%;
+  padding: 10px;
   flex-direction: column;
   align-items: center;
 }
@@ -619,11 +637,6 @@ ul {
   border: 0.5px solid #b71c1c;
   background-color: #f44336;
   color: var(--bg-secondary-light);
-}
-
-.info-popup {
-  border: 0.5px solid #0d47a1;
-  color: #3f51b5;
 }
 
 /* =============================================== */

@@ -1,5 +1,9 @@
 @import url('../../styles/host.css');
 
+.content {
+  flex-direction: row;
+}
+
 .list {
   display: flex;
   flex-grow: 6;
@@ -8,7 +12,7 @@
 
 .list .event {
   display: flex;
-  width: 75%;
+  width: 95%;
   padding: 15px 20px;
   flex-direction: column;
   border-radius: 5px;
@@ -16,16 +20,6 @@
 
 .list .event + .event {
   margin-top: 30px;
-}
-
-.list .event .schedule {
-  display: flex;
-  margin-bottom: 15px;
-  align-items: center;
-}
-
-.list .event .schedule > * + * {
-  margin-left: 5px;
 }
 
 .list .event .bottom {
@@ -41,4 +35,14 @@
 
 .search {
   flex-grow: 4;
+}
+
+.schedule {
+  display: flex;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.schedule > * + * {
+  margin-left: 5px;
 }

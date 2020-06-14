@@ -1,0 +1,32 @@
+footer {
+  display: flex;
+  margin-top: 15px;
+  padding: 15px;
+  justify-content: center;
+  text-align: center;
+  color: #919191;
+  background-color: var(--bg-darker);
+}
+
+footer .icons {
+  display: flex;
+}
+
+footer .icons .img {
+  width: 45px;
+  height: 45px;
+  padding: 10px;
+  border-radius: 100%;
+  background-color: var(--bg-secondary);
+  color: var(--bg-darker);
+}
+
+footer .icons img {
+  width: 20px;
+  height: 20px;
+  filter: grayscale()
+}
+
+footer .icons .img + .img {
+  margin-left: 25px;
+}

@@ -1,4 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { Person } from '../schemas/person';
 
 @Component({
   selector: 'app-person',
@@ -6,10 +7,11 @@ import { Component, OnInit, Output } from '@angular/core';
   styleUrls: ['./person.component.css']
 })
 export class PersonComponent implements OnInit {
-  @Output() person: any
+  @Output() person: Person
 
   constructor() {
     this.person = {
+      email: "",
       profile: {
         firstName: "First",
         lastName: "Name"

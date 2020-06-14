@@ -31,10 +31,10 @@ import { ResourcesComponent } from './resources/resources.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     MarkdownModule.forRoot(),
     TemplatesModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

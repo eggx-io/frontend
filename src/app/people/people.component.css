@@ -18,6 +18,10 @@
   padding: 15px 20px;
 }
 
+.person * {
+  cursor: pointer;
+}
+
 .person img {
   width: 100px;
   margin-right: 10px;

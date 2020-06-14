@@ -1,4 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { Group } from '../schemas/group'
 
 @Component({
   selector: 'app-people',
@@ -7,13 +8,19 @@ import { Component, OnInit, Output } from '@angular/core';
 })
 export class PeopleComponent implements OnInit {
   @Output() selectedGroup: string = "executives"
-  @Output() group: {}[] = []
+  @Output() group: Group
 
   constructor() {
+    this.group = {
+      name: "Executives",
+      people: []
+    }
     for (let i = 1; i <= 5; ++i) {
-      this.group.push({
+      this.group.people.push({
         title: "Vice-President",
         person: {
+          _id: "adawdaw",
+          email: "",
           profile: {
             firstName: "First",
             lastName: "Name"
@@ -32,6 +39,10 @@ export class PeopleComponent implements OnInit {
   switchGroup(group) {
     if (this.selectedGroup == group) return;
     this.selectedGroup = group;
+  }
+
+  navigatePerson(_id) {
+    window.location.pathname = `/person/${_id}`
   }
 
 }

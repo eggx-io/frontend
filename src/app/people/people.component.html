@@ -1,6 +1,5 @@
 <app-navbar></app-navbar>
 <h1 class="page-title">People</h1>
-
 <div class="content">
   <div class="group">
     <span (click)="switchGroup('executives')" [class]="selectedGroup == 'executives' ? 'color-primary' : 'color-muted'">
@@ -11,7 +10,7 @@
       Alumni
     </span>
   </div>
-  <div class="person" *ngFor="let item of group">
+  <div class="person" *ngFor="let item of group.people" (click)="navigatePerson(item.person._id)">
     <img [src]="item.person.avatar" />
     <div class="text">
       <h3>{{item.person.profile.firstName}} {{item.person.profile.lastName}}</h3>
@@ -19,3 +18,4 @@
     </div>
   </div>
 </div>
+<app-footer></app-footer>

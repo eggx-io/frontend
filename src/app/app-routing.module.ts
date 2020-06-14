@@ -17,11 +17,11 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'resources', component: ResourcesComponent },
   { path: 'events', component: EventsComponent },
-  { path: 'event', component: EventComponent },
+  { path: 'event/_id', component: EventComponent },
   { path: 'people', component: PeopleComponent },
-  { path: 'person', component: PersonComponent },
+  { path: 'person/:_id', component: PersonComponent },
   { path: 'projects', component: ProjectsComponent },
-  { path: 'project', component: ProjectComponent }
+  { path: 'project/:_id', component: ProjectComponent }
 ];
 
 @NgModule({

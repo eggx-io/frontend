@@ -1,6 +1,5 @@
 <app-navbar></app-navbar>
 <h1 class="page-title">Events</h1>
-
 <div class="content">
   <div class="list">
     <div class="event bg-secondary-light" *ngFor="let event of events">
@@ -15,7 +14,7 @@
         </span>
       </div>
       <div class="bottom">
-        <button class="btn-primary" (click)="showEvent(event._id)">
+        <button class="btn-primary" (click)="popupEvent = event">
           Show more
         </button>
         <span [ngClass]="['event-type', getEventTypeClass(event.type)]">{{event.type}}</span>
@@ -40,10 +39,38 @@
         </div>
       </div>
     </div>
-    <!-- 
+    <!--
       type
       schedule
       people
      -->
   </div>
 </div>
+<div id="infoPopup" (click)="popupEvent = null" class="popup" *ngIf="popupEvent">
+  <div class="info-popup" (click)="$event.stopPropagation()">
+    <div class="body">
+      <div class="header">
+        <div class="title">
+          <h1>{{popupEvent.title}}</h1>
+          <div class="schedule">
+            <i class="material-icons color-teal">event</i>
+            <span>{{popupEvent.schedule.start | date}}</span>
+            <span *ngIf="popupEvent.schedule.end != popupEvent.schedule.start">
+              &mdash;
+              <span>{{popupEvent.schedule.end | date}}</span>
+            </span>
+          </div>
+        </div>
+        <button class="btn-primary" (click)="popupEvent = null">
+          <i class="material-icons">close</i>
+          Close
+        </button>
+      </div>
+      <div class="text">{{popupEvent.description}}</div>
+    </div>
+  </div>
+  <div class="dismiss">
+    <button (click)="popupEvent = null">Close</button>
+  </div>
+</div>
+<app-footer></app-footer>
