@@ -1,0 +1,41 @@
+#navbar {
+  display: flex;
+  height: 70px;
+  padding: 15px 4% 15px 2.5%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  align-items: center;
+}
+
+img {
+  height: 24px;
+  cursor: pointer;
+}
+
+.menu {
+  display: flex;
+  flex-grow: 1;
+  margin-left: 4%;
+  margin-right: 4%;
+  align-items: center;
+}
+
+.menu button {
+  margin-left: 25px;
+  border: none;
+  font-weight: 600;
+}
+
+.actions i {
+  cursor: pointer;
+}
+
+.action i:hover {
+  color: var(--color-black);
+}
+
+.actions i + i {
+  margin-left: 25px;
+}

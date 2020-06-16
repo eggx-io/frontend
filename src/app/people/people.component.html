@@ -1,0 +1,21 @@
+<app-navbar></app-navbar>
+<h1 class="page-title">People</h1>
+<div class="content">
+  <div class="group">
+    <span (click)="switchGroup('executives')" [class]="selectedGroup == 'executives' ? 'color-primary' : 'color-muted'">
+      Executives
+    </span>
+    <div class="vertical-divider"></div>
+    <span (click)="switchGroup('alumni')" [class]="selectedGroup == 'alumni' ? 'color-primary' : 'color-muted'">
+      Alumni
+    </span>
+  </div>
+  <div class="person" *ngFor="let item of group.people" (click)="navigatePerson(item.person._id)">
+    <img [src]="item.person.avatar" />
+    <div class="text">
+      <h3>{{item.person.profile.firstName}} {{item.person.profile.lastName}}</h3>
+      <p>{{item.tagline}}</p>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

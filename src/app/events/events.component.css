@@ -1,0 +1,48 @@
+@import url('../../styles/host.css');
+
+.content {
+  flex-direction: row;
+}
+
+.list {
+  display: flex;
+  flex-grow: 6;
+  flex-direction: column;
+}
+
+.list .event {
+  display: flex;
+  width: 95%;
+  padding: 15px 20px;
+  flex-direction: column;
+  border-radius: 5px;
+}
+
+.list .event + .event {
+  margin-top: 30px;
+}
+
+.list .event .bottom {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list .event .bottom .event-type {
+  margin-right: 10px;
+  font-size: 14px;
+  text-transform: uppercase;
+}
+
+.search {
+  flex-grow: 4;
+}
+
+.schedule {
+  display: flex;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.schedule > * + * {
+  margin-left: 5px;
+}
