@@ -1,6 +1,10 @@
 import { defaultLog, dateStructure } from './-defaults'
 import { Schema } from './-schema'
 
+export interface PersonSearchOptions {
+  name?: string
+}
+
 export class Person extends Schema {
   email: string
   email_verified?: boolean

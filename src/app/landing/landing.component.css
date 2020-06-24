@@ -1,0 +1,67 @@
+@import url("../../styles/host.css");
+
+.page-title {
+  display: flex;
+  padding-bottom: 30px;
+}
+
+.page-title .text {
+  width: 50%;
+}
+
+.page-title .img {
+  width: 45%;
+  min-height: 300px;
+  max-height: 100vh;
+}
+
+.content {
+  box-shadow: var(--drop-shadow-top-light);
+}
+
+.post {
+  display: flex;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  justify-content: center;
+  align-items: center;
+}
+
+.post .text {
+  order: 2;
+  width: 40%;
+  margin-right: 3%;
+  margin-left: 3%;
+}
+
+.post .text .blurb {
+  margin-bottom: 20px;
+}
+
+.post .img {
+  display: inline-flex;
+  order: 1;
+  width: 27%;
+  height: 250px;
+  border-radius: 2px;
+  align-items: center;
+}
+
+.post .img img {
+  width: 100%;
+  max-height: 100%;
+  border: 0.5px dashed var(--color-primary);
+  border-radius: 2px;
+}
+
+.post + .post {
+  padding-top: 45px;
+}
+
+.post + .post .text, .post.post-flip .text {
+  order: 1;
+}
+
+.post + .post .img, .post.post-flip .img {
+  order: 2;
+}

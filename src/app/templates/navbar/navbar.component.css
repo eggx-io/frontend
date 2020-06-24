@@ -22,7 +22,7 @@ img {
   align-items: center;
 }
 
-.menu button {
+.menu .btn {
   margin-left: 25px;
   border: none;
   font-weight: 600;

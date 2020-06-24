@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -6,10 +6,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  @Output() showDropShadow: boolean = false
 
   constructor() { }
 
   ngOnInit(): void {
+    window.onscroll = () => this.showDropShadow = window.scrollY >= 25;
   }
 
 }

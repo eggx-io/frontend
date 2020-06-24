@@ -1,20 +1,20 @@
-<div id="navbar" class="bg-accent drop-shadow">
+<div id="navbar" class="bg-accent" [ngClass]="{'drop-shadow': showDropShadow}">
   <a href="/"><img src="assets/eggx-logo-text.svg"></a>
   <div class="menu">
-    <a href="/about">
-      <button class="btn-primary bg-accent">About</button>
+    <a href="/about" class="btn btn-primary btn-accent">
+      About
     </a>
-    <a href="/people">
-      <button class="btn-primary bg-accent">People</button>
+    <a href="/people" class="btn btn-primary btn-accent">
+      People
     </a>
-    <a href="/events">
-      <button class="btn-primary bg-accent">Events</button>
+    <a href="/events" class="btn btn-primary btn-accent">
+      Events
     </a>
-    <a href="/projects">
-      <button class="btn-primary bg-accent">Projects</button>
+    <a href="/projects" class="btn btn-primary btn-accent">
+      Projects
     </a>
-    <a href="/resources">
-      <button class="btn-primary bg-accent">Resources</button>
+    <a href="/resources" class="btn btn-primary btn-accent">
+      Resources
     </a>
   </div>
   <div class="actions">

@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
+import { Project } from '../schemas/project';
+import { Observable } from 'rxjs';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-projects',
@@ -6,10 +9,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
+  @Output() projects$: Observable<Project[]>
 
-  constructor() { }
+  constructor(
+    private apiService: ApiService
+  ) { }
 
   ngOnInit(): void {
+    this.projects$ = this.apiService.search("projects", {}, {
+      limit: 25,
+      projection: {
+        name: 1,
+        domain: 1,
+        featuredImage: 1
+      },
+      populate: {
+        path: 'team', select: 'members'
+      }
+    })
   }
 
 }

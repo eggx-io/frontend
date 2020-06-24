@@ -1,0 +1,32 @@
+<app-navbar></app-navbar>
+
+<div class="page-title post post-flip" *ngFor="let spotlightPost of spotlightPost$ | async | slice:0:1">
+  <div class="text">
+    <h1>{{spotlightPost.title}}</h1>
+    <p class="blurb">{{spotlightPost.blurb}}</p>
+    <a href="/post/fake">
+      <button class="btn-primary">
+        {{spotlightPost.callToAction ? spotlightPost.callToAction : 'Learn more'}}
+      </button>
+    </a>
+  </div>
+  <div class="img">
+    <img src="{{spotlightPost.featuredImage}}" />
+  </div>
+</div>
+<div class="content">
+  <div class="post" *ngFor="let post of posts$ | async">
+    <div class="text">
+      <h1>{{post.title}}</h1>
+      <p>{{post.blurb}}</p>
+      <a class="btn-inverse" href="/post/{{post._id}}">
+        {{post.callToAction ? post.callToAction : 'Learn more'}}
+      </a>
+    </div>
+    <div class="img">
+      <img src="{{post.featuredImage}}" />
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

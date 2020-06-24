@@ -1,5 +1,16 @@
 @import url('../../styles/host.css');
 
+label {
+  text-transform: uppercase;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  margin-right: 6px;
+}
+
+input[type="button"] + input[type="button"] {
+  margin-left: 10px;
+}
+
 .content {
   flex-direction: row;
 }
@@ -35,6 +46,14 @@
 
 .search {
   flex-grow: 4;
+}
+
+.search .form .group {
+  margin-bottom: 10px;
+}
+
+.search .form .group .btn + .btn {
+  margin-left: 10px;
 }
 
 .schedule {

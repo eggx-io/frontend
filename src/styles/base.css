@@ -48,29 +48,21 @@ body .background {
   opacity: 0.3;
 }
 
-button {
+button, .btn, input[type="button"] {
   display: inline-flex;
   width: fit-content;
   padding: 7px 10px;
   align-items: center;
   border: none;
+  border-radius: 3px;
   background-color: transparent;
   color: var(--color-primary);
   cursor: pointer !important;
 }
 
-button:hover,
-button.bg-primary:hover {
-  background-color: var(--bg-secondary) !important;
-  /* color: var(--color-primary); */
-}
-
-button.bg-secondary:hover {
-  background-color: var(--bg-muted) !important;
-}
-
-button.bg-accent:hover {
-  background-color: #20dedf !important;
+button.pressed, .btn.pressed, input[type="button"].pressed {
+  background-color: var(--color-teal);
+  color: var(--color-inverse);
 }
 
 button i {
@@ -85,7 +77,10 @@ code {
   border-radius: 2px;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   color: var(--color-black);
 }
 
@@ -325,8 +320,7 @@ ul {
 .page .content {
   display: flex;
   flex-grow: 1;
-  margin: 25px 0 25px 0;
-  padding: 0 2.5vw 0 2.5vw;
+  padding: 25px 2.5vw 25px 2.5vw;
   flex-direction: column;
 }
 
@@ -353,10 +347,13 @@ ul {
   --color-purple: #6a1b9a;
   --color-red: #f44336;
   --color-teal: #16c3c4;
+  --color-teal-lighter: #20dedf;
   --color-teal-darker: #18a7a8;
   --drop-shadow: 1px 1px 3px rgba(99, 99, 99, 0.5);
   --drop-shadow-light: 1px 1px 3px rgba(122, 122, 122, 0.3);
   --drop-shadow-strong: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  --drop-shadow-top: -1px -1px 3px rgba(99, 99, 99, 0.5);
+  --drop-shadow-top-light: -1px -1px 3px rgba(122, 122, 122, 0.3);
 }
 
 /* =================== themeing ====================== */
@@ -449,11 +446,25 @@ ul {
   color: var(--color-primary);
 }
 
+.btn-primary:hover {
+  background-color: var(--color-primary) !important;
+  color: var(--color-inverse);
+}
+
+.btn-secondary:hover {
+  background-color: var(--bg-muted) !important;
+}
+
 .btn-accent {
   padding: 6px 10px;
-  border: 1px solid var(--color-teal);
-  background-color: var(--color-teal);
-  color: var(--color-teal);
+  border: 1px solid var(--color-accent);
+  background-color: var(--color-accent);
+  color: var(--color-black);
+}
+
+.btn-accent:hover {
+  background-color: var(--color-teal-lighter) !important;
+  color: var(--color-black);
 }
 
 .btn-inverse {
@@ -464,7 +475,8 @@ ul {
 }
 
 .btn-inverse:hover {
-  background-color: var(--color-teal-darker);
+  background-color: var(--color-accent);
+  color: var(--color-black);
 }
 
 .divider {
@@ -521,15 +533,15 @@ ul {
 }
 
 .drop-shadow {
-  box-shadow: 1px 1px 3px rgba(99, 99, 99, 0.5);
+  box-shadow: var(--drop-shadow);
 }
 
 .drop-shadow-light {
-  box-shadow: 1px 1px 3px rgba(122, 122, 122, 0.3);
+  box-shadow: var(--drop-shadow-light);
 }
 
 .drop-shadow-strong {
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  box-shadow: var(--drop-shadow-strong);
 }
 
 .invisible {
@@ -706,10 +718,4 @@ ul {
   -webkit-user-select: none;
   user-select: none;
   cursor: default;
-}
-input,
-button,
-textarea,
-:focus {
-  outline: none;
 }

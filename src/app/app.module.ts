@@ -1,7 +1,10 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { MarkdownModule } from 'ngx-markdown';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -16,6 +19,7 @@ import { PersonComponent } from './person/person.component';
 import { ProjectComponent } from './project/project.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ResourcesComponent } from './resources/resources.component';
+import { LandingComponent } from './landing/landing.component';
 
 @NgModule({
   declarations: [
@@ -27,14 +31,18 @@ import { ResourcesComponent } from './resources/resources.component';
     PersonComponent,
     ProjectComponent,
     ProjectsComponent,
-    ResourcesComponent
+    ResourcesComponent,
+    LandingComponent
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     MarkdownModule.forRoot(),
+    MatNativeDateModule,
+    MatDatepickerModule,
     TemplatesModule,
+    AppRoutingModule,
     BrowserAnimationsModule,
-    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

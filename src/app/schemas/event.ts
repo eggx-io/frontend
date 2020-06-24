@@ -1,5 +1,20 @@
 import { defaultLog, scheduleStructure, ObjectId } from './-defaults'
 import { Schema } from './-schema'
+import { Person } from './person'
+
+export interface EventSearchOptions {
+  type?: string[]
+  title?: string
+  schedule?: {
+    start?: number
+    end?: number
+  }
+  people?: {
+    author?: ObjectId
+    hosts?: ObjectId[]
+    invitees?: ObjectId[]
+  }
+}
 
 export class Event extends Schema {
   type: string
@@ -16,9 +31,9 @@ export class Event extends Schema {
     text?: string
   }
   people: {
-    author: ObjectId
-    hosts: ObjectId[],
-    invitees?: ObjectId[]
+    author: ObjectId | Person
+    hosts: ObjectId[] | Person[],
+    invitees?: ObjectId[] | Person[]
   }
   tags?: string[] = []
   log?: defaultLog

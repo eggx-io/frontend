@@ -2,7 +2,7 @@
 <h1 class="page-title">Events</h1>
 <div class="content">
   <div class="list">
-    <div class="event bg-secondary-light" *ngFor="let event of events">
+    <div class="event bg-secondary-light" *ngFor="let event of events$ | async">
       <h2>{{event.title}}</h2>
       <p class="blurb">{{event.blurb}}</p>
       <div class="schedule">
@@ -26,16 +26,15 @@
       <h3>Filter events</h3>
       <label>Event Type</label>
       <div class="group">
-        <div class="btn">General</div>
-        <div class="btn">Sponsored</div>
-        <div class="btn">Workshops</div>
+        <input class="btn-primary" (click)="toggleTypeFilter('event')" [ngClass]="{'pressed': typeIsFiltered('event')}" type="button" value="General" />
+        <input class="btn-primary" (click)="toggleTypeFilter('sponsored')" [ngClass]="{'pressed': typeIsFiltered('sponsored')}" type="button" value="Sponsored" />
+        <input class="btn-primary" (click)="toggleTypeFilter('workshop')" [ngClass]="{'pressed': typeIsFiltered('workshop')}" type="button" value="Workshops" />
       </div>
       <label>Date</label>
       <div class="list">
         <div class="item">
           <label for="dateFrom">From: </label>
-          <!-- <input [matDatepicker]="dateFrom">
-          <mat-datepicker #dateFrom></mat-datepicker> -->
+          <input id="dateFrom" type="date">
         </div>
       </div>
     </div>
