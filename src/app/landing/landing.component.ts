@@ -1,6 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { Post } from '../schemas/post';
-import { Observable } from 'rxjs';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -9,15 +8,22 @@ import { ApiService } from '../api.service';
   styleUrls: ['./landing.component.css']
 })
 export class LandingComponent implements OnInit {
-  @Output() spotlightPost$: Observable<Post[]>
-  @Output() posts$: Observable<Post[]>
+  @Output() loading: boolean
+  @Output() spotlightPost: Post
+  @Output() posts: Post[] = []
 
   constructor(
     private apiService: ApiService
   ) { }
 
   ngOnInit(): void {
-    this.spotlightPost$ = this.apiService.search("posts", { spotlight: true }, {
+    if (this.loading) return;
+    this.loading = true;
+    const tracker = {
+      doneSpotlightPost: false,
+      doneInitialPosts: false
+    };
+    this.apiService.search("posts", { spotlight: true }, {
       limit: 1,
       projection: {
         title: 1,
@@ -25,14 +31,42 @@ export class LandingComponent implements OnInit {
         callToAction: 1,
         featuredImage: 1
       }
+    }).subscribe(([spotlightPost]) => {
+      this.spotlightPost = spotlightPost
+      if (tracker.doneInitialPosts) {
+        this.loading = false;
+      } else {
+        tracker.doneSpotlightPost = true;
+      }
     })
-    this.posts$ = this.apiService.search("posts", {}, {
+    this.doSearch(tracker);
+  }
+
+  onScroll(): void {
+    this.doSearch();
+  }
+
+  doSearch(tracker = undefined): void {
+    if (this.loading && !tracker) return;
+    if (!tracker) this.loading = true;
+    this.apiService.search("posts", {}, {
       limit: 5,
       projection: {
         title: 1,
         blurb: 1,
         callToAction: 1,
         featuredImage: 1
+      }
+    }).subscribe(posts => {
+      this.posts.push(...posts);
+      if (tracker) {
+        if (tracker.doneSpotlightPost) {
+          this.loading = false;
+        } else {
+          tracker.doneInitialPosts = true;
+        }
+      } else {
+        this.loading = false;
       }
     })
   }

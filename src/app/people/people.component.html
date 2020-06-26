@@ -1,16 +1,16 @@
 <app-navbar></app-navbar>
 <h1 class="page-title">People</h1>
 <div class="content">
-  <div class="group">
-    <span *ngFor="let group of groups; last as isLast">
+  <div class="groups">
+    <div class="group" *ngFor="let group of groups; last as isLast">
       <span (click)="switchGroup(group.name)"
         [ngClass]="{'color-primary': selectedGroup == group.name.toLowerCase(), 'color-muted': selectedGroup != group.name.toLowerCase()}">
         {{group.name}}
       </span>
       <div *ngIf="!isLast" class="vertical-divider"></div>
-    </span>
+    </div>
   </div>
-  <a href="/person/{{item.person._id}}" *ngFor="let item of people">
+  <div *ngFor="let item of people">
     <div class="person">
       <img [src]="item.person.avatar" />
       <div class="text">
@@ -18,6 +18,6 @@
         <p>{{item.tagline}}</p>
       </div>
     </div>
-  </a>
+  </div>
 </div>
 <app-footer></app-footer>

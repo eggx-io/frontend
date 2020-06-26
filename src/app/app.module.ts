@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-import { MarkdownModule } from 'ngx-markdown';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MarkdownModule } from 'ngx-markdown';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 import { AppRoutingModule } from './app-routing.module';
 
@@ -37,12 +39,14 @@ import { LandingComponent } from './landing/landing.component';
   imports: [
     BrowserModule,
     HttpClientModule,
-    MarkdownModule.forRoot(),
+    MatProgressSpinnerModule,
     MatNativeDateModule,
     MatDatepickerModule,
     TemplatesModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    MarkdownModule.forRoot(),
+    InfiniteScrollModule
   ],
   providers: [],
   bootstrap: [AppComponent]

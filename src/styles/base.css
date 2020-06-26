@@ -48,7 +48,9 @@ body .background {
   opacity: 0.3;
 }
 
-button, .btn, input[type="button"] {
+button,
+.btn,
+input[type="button"] {
   display: inline-flex;
   width: fit-content;
   padding: 7px 10px;
@@ -60,7 +62,9 @@ button, .btn, input[type="button"] {
   cursor: pointer !important;
 }
 
-button.pressed, .btn.pressed, input[type="button"].pressed {
+button.pressed,
+.btn.pressed,
+input[type="button"].pressed {
   background-color: var(--color-teal);
   color: var(--color-inverse);
 }
@@ -93,7 +97,7 @@ h1 {
 h2 {
   margin-top: 0;
   margin-bottom: 5px;
-  font: 600 24px "Gotham Light Regular", sans-serif !important;
+  font: 500 24px "Roboto", "Montserrat", "Gotham Light Regular", sans-serif !important;
 }
 
 h3 {
@@ -251,16 +255,19 @@ ul {
 
 #infoPopup .info-popup {
   display: flex;
-  width: 70%;
-  min-height: 70%;
+  width: calc(70% + 30px);
+  height: fit-content;
   margin-bottom: 20px;
+  padding: 15px 0 15px 15px;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
   border: 0.5px solid #0d47a1;
-  border-radius: 10px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   background-color: var(--bg-primary);
   box-shadow: var(--drop-shadow-strong);
+  overflow-y: auto;
 }
 
 #infoPopup .info-popup i {
@@ -346,6 +353,7 @@ ul {
   --color-black: #282828;
   --color-purple: #6a1b9a;
   --color-red: #f44336;
+  --color-orange: #ff9800;
   --color-teal: #16c3c4;
   --color-teal-lighter: #20dedf;
   --color-teal-darker: #18a7a8;
@@ -430,6 +438,10 @@ ul {
   color: var(--color-red);
 }
 
+.color-orange {
+  color: var(--color-orange);
+}
+
 .color-teal {
   color: var(--color-teal);
 }
@@ -446,12 +458,14 @@ ul {
   color: var(--color-primary);
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:hover > i {
   background-color: var(--color-primary) !important;
   color: var(--color-inverse);
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover,
+.btn-secondary:hover > i {
   background-color: var(--bg-muted) !important;
 }
 
@@ -462,7 +476,8 @@ ul {
   color: var(--color-black);
 }
 
-.btn-accent:hover {
+.btn-accent:hover,
+.btn-accent:hover > i {
   background-color: var(--color-teal-lighter) !important;
   color: var(--color-black);
 }
@@ -474,7 +489,8 @@ ul {
   color: var(--color-inverse);
 }
 
-.btn-inverse:hover {
+.btn-inverse:hover,
+.btn-inverse:hover > i {
   background-color: var(--color-accent);
   color: var(--color-black);
 }

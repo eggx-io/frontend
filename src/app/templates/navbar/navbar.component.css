@@ -28,14 +28,11 @@ img {
   font-weight: 600;
 }
 
-.actions i {
-  cursor: pointer;
+.actions a {
+  padding: 2px 10px;
+  font-size: 24px;
 }
 
-.action i:hover {
-  color: var(--color-black);
-}
-
-.actions i + i {
+.actions a + a {
   margin-left: 25px;
 }

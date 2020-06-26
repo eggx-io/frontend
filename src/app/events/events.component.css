@@ -1,4 +1,4 @@
-@import url('../../styles/host.css');
+@import url("../../styles/host.css");
 
 label {
   text-transform: uppercase;
@@ -13,6 +13,13 @@ input[type="button"] + input[type="button"] {
 
 .content {
   flex-direction: row;
+}
+
+.loading {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
 }
 
 .list {
@@ -64,4 +71,11 @@ input[type="button"] + input[type="button"] {
 
 .schedule > * + * {
   margin-left: 5px;
+}
+
+.popup .dismiss button {
+  display: inline-flex;
+  width: 20%;
+  justify-content: center;
+  font-size: 16px;
 }

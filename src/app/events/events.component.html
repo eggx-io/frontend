@@ -1,8 +1,8 @@
 <app-navbar></app-navbar>
 <h1 class="page-title">Events</h1>
 <div class="content">
-  <div class="list">
-    <div class="event bg-secondary-light" *ngFor="let event of events$ | async">
+  <div class="list" infiniteScroll (scrolled)="onScroll()">
+    <div class="event bg-secondary-light" *ngFor="let event of events">
       <h2>{{event.title}}</h2>
       <p class="blurb">{{event.blurb}}</p>
       <div class="schedule">
@@ -14,15 +14,18 @@
         </span>
       </div>
       <div class="bottom">
-        <button class="btn-primary" (click)="popupEvent = event">
+        <button class="btn-primary" (click)="showEvent(event)">
           Show more
         </button>
         <span [ngClass]="['event-type', getEventTypeClass(event.type)]">{{event.type}}</span>
       </div>
     </div>
+    <div class="loading">
+      <mat-spinner *ngIf="loading"></mat-spinner>
+    </div>
   </div>
   <div class="search">
-    <div class="form">
+    <div class="form" *ngIf="!showPopup">
       <h3>Filter events</h3>
       <label>Event Type</label>
       <div class="group">
@@ -45,9 +48,9 @@
      -->
   </div>
 </div>
-<div id="infoPopup" (click)="popupEvent = null" class="popup" *ngIf="popupEvent">
+<div id="infoPopup" (click)="hideEvent()" class="popup" *ngIf="showPopup">
   <div class="info-popup" (click)="$event.stopPropagation()">
-    <div class="body">
+    <div class="body" *ngIf="!loading">
       <div class="header">
         <div class="title">
           <h1>{{popupEvent.title}}</h1>
@@ -60,16 +63,19 @@
             </span>
           </div>
         </div>
-        <button class="btn-primary" (click)="popupEvent = null">
+        <button class="btn-primary" (click)="hideEvent()">
           <i class="material-icons">close</i>
           Close
         </button>
       </div>
-      <div class="text">{{popupEvent.description}}</div>
+      <markdown class="text" [data]="popupEvent.description"></markdown>
+    </div>
+    <div class="body loading" *ngIf="loading">
+      <mat-spinner></mat-spinner>
     </div>
   </div>
   <div class="dismiss">
-    <button (click)="popupEvent = null">Close</button>
+    <button class="btn-inverse" (click)="hideEvent()">Close</button>
   </div>
 </div>
 <app-footer></app-footer>

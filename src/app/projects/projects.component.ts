@@ -1,6 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
 import { Project } from '../schemas/project';
-import { Observable } from 'rxjs';
 import { ApiService } from '../api.service';
 
 @Component({
@@ -9,14 +8,25 @@ import { ApiService } from '../api.service';
   styleUrls: ['./projects.component.css']
 })
 export class ProjectsComponent implements OnInit {
-  @Output() projects$: Observable<Project[]>
+  @Output() loading: boolean
+  @Output() projects: Project[] = []
 
   constructor(
     private apiService: ApiService
   ) { }
 
   ngOnInit(): void {
-    this.projects$ = this.apiService.search("projects", {}, {
+    this.doSearch();
+  }
+
+  onScroll(): void {
+    this.doSearch();
+  }
+
+  doSearch(): void {
+    if (this.loading) return;
+    this.loading = true;
+    this.apiService.search("projects", {}, {
       limit: 25,
       projection: {
         name: 1,
@@ -26,6 +36,9 @@ export class ProjectsComponent implements OnInit {
       populate: {
         path: 'team', select: 'members'
       }
+    }).subscribe(projects => {
+      this.projects.push(...projects);
+      this.loading = false;
     })
   }
 

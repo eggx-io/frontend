@@ -1,7 +1,7 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { Location } from '@angular/common';
 import { Group } from '../schemas/group'
 import { ApiService } from '../api.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-people',
@@ -14,6 +14,7 @@ export class PeopleComponent implements OnInit {
   @Output() people: Group["people"]
 
   constructor(
+    private location: Location,
     private apiService: ApiService
   ) { }
 

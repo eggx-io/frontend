@@ -10,6 +10,7 @@ import { Person, PersonSearchOptions } from './schemas/person';
 import { Group, GroupSearchOptions } from './schemas/group';
 import { Post, PostSearchOptions } from './schemas/post';
 import { Project, ProjectSearchOptions } from './schemas/project';
+import { ObjectId } from './schemas/-defaults';
 
 interface QueryPopulateOptions {
   /** space delimited path(s) to populate */
@@ -26,7 +27,7 @@ interface QueryPopulateOptions {
   populate?: QueryPopulateOptions | QueryPopulateOptions[];
 }
 
-interface QueryOptions {
+export interface QueryOptions {
   populate?: QueryPopulateOptions | QueryPopulateOptions[],
   sort?: object,
   limit?: number,
@@ -66,17 +67,19 @@ export class ApiService {
     };
   }
 
+  public fetch(path: "event", id: ObjectId, queryOptions?: QueryOptions): Observable<Event>
   /**
    * Fetch a document of a specific Model
    * @param path name of the model e.g.) event
    * @param id objectid of the document
    * @param q extra query options
    */
-  public fetch<T extends Schema>(path: string, id: string, q: { [key: string]: string | number | boolean } & QueryOptions = {}): Observable<T> {
-    return this.http.get<T>(
-      `${environment.api_host}/open/fetch/${path}/${id}${this.flattenQueryOptions({ q: q })}`
+  public fetch<T extends Schema>(path: string, id: ObjectId, queryOptions?: QueryOptions): Observable<T> {
+    return this.http.post<T>(
+      `${environment.api_host}/open/fetch/${path}/${id}`, { options: queryOptions }
     ).pipe(
-      catchError(this.handleError<T>(`fetch ${path}`))
+      catchError(this.handleError<T>(`fetch ${path}`)),
+      map((v: T) => environment.production ? v : !!v ? v : this.demoValues[path])
     );
   }
 
@@ -91,12 +94,11 @@ export class ApiService {
    * @param q search query & extra query options
    */
   public search<T extends Schema>(path: string, q: { [key: string]: string | number | boolean }, queryOptions?: QueryOptions): Observable<T[]> {
-    let returned = false;
     return this.http.post<T[]>(
       `${environment.api_host}/open/search/${path}`, { q: q, options: queryOptions }
     ).pipe(
-      map((v: T[]) => v.length > 0 || environment.production ? v : this.demoValues[path]),
-      catchError(this.handleError<T[]>(`search ${path}`))
+      catchError(this.handleError<T[]>(`search ${path}`)),
+      map((v: T[]) => environment.production ? v : v.length > 0 ? v : this.demoValues[path])
     );
   }
 }
@@ -106,11 +108,41 @@ class DemoValues {
     const events = []
     for (let i = 1; i <= 10; ++i) {
       events.push({
-        _id: 'awdawdawda',
+        _id: '507f1f77bcf86cd799439011',
         type: ["event", "workshop", "sponsored"][Math.floor(Math.random() * 3)],
         title: "This is an event",
         blurb: "Welcome to this event! wooo it's pretty cool yayayayayyay.",
-        description: "Welcome to this event! wooo it's pretty cool yayayayayyay.\n\n\nadhauwdhauwh dbwbaudjawduawduha jdhuaw kjdah bnjkdn kjawbdaw jdjb waknb wa \n\ndajwh dajw hduwah uhawu dhuw na hwaubdkajndwau bawd bawj dauwk nadw \n\n abwdkjbawkduawb kdb wahbd kawb awjkn dbkjawb jkab jkwb kjadw jk abjw ",
+        description: "\
+          # Welcome to this event\n\n\n\
+          _wooo it's pretty cool_\n\
+          **yayayayayyay.**\n\n\n\
+          ## adhauwdhauwh\n\n\n\
+          dawdawd\n\n\n\
+          ### dbwbaudjawduawduha\n\n\n\
+          awdawd\n\n\n\
+          #### jdhuaw kjdah bnjkdn kjawbdaw jdjb waknb wa\n\n\n\
+          ```python\n\
+          def hello(wow):\n\
+          \t#woah\n\
+          \tglobal hi_text\n\
+          \tprint(hi_text)\n\
+          \traise ValueError('what?')\n\
+          ```\n\
+          # Welcome to this event\n\n\n\
+          _wooo it's pretty cool_\n\
+          **yayayayayyay.**\n\n\n\
+          ## adhauwdhauwh\n\n\n\
+          dawdawd\n\n\n\
+          ### dbwbaudjawduawduha\n\n\n\
+          awdawd\n\n\n\
+          #### jdhuaw kjdah bnjkdn kjawbdaw jdjb waknb wa\n\n\n\
+          ```python\n\
+          def hello(wow):\n\
+          \t#woah\n\
+          \tglobal hi_text\n\
+          \tprint(hi_text)\n\
+          \traise ValueError('what?')\n\
+          ```",
         schedule: {
           start: Date.now(),
           end: Date.now() + 1234567 * i
@@ -123,6 +155,7 @@ class DemoValues {
     }
     return events
   })()
+  event = this.events[0]
   groups: Group[] = (() => {
     const exec = {
       name: "Executives",
@@ -136,7 +169,7 @@ class DemoValues {
       exec.people.push({
         title: "Vice-President",
         person: {
-          _id: "adawdaw",
+          _id: "507f1f77bcf86cd799439011",
           email: "",
           profile: {
             firstName: "Exec",
@@ -149,7 +182,7 @@ class DemoValues {
       })
       alum.people.push({
         person: {
-          _id: "adawdaw",
+          _id: "507f1f77bcf86cd799439011",
           email: "",
           profile: {
             firstName: "Alumni",
@@ -163,6 +196,7 @@ class DemoValues {
     }
     return [exec, alum]
   })()
+  group = this.groups[0]
   posts: Post[] = (() => {
     return [{
       title: "Site just launched, check it out",
@@ -190,6 +224,7 @@ class DemoValues {
       tags: []
     }]
   })()
+  post = this.posts[0]
   projects: Project[] = (() => {
     const domains = ["web", "mobile", "ai"], projects = []
     for (let i = 0; i < 25; ++i) {
@@ -198,7 +233,7 @@ class DemoValues {
       for (let j = 1; j < l; ++j)
         members.push("awdawd")
       projects.push({
-        _id: "awdawd",
+        _id: "507f1f77bcf86cd799439011",
         name: "This is a project",
         team: {
           draft: "awdaw",
@@ -206,9 +241,11 @@ class DemoValues {
           members,
           mentor: "adwa"
         },
+        featuredImage: "https://images.unsplash.com/photo-1556742111-a301076d9d18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
         domain: domains[i % 3]
       })
     }
     return projects
   })()
+  project = this.projects[0]
 }

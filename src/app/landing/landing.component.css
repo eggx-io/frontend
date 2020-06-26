@@ -1,5 +1,12 @@
 @import url("../../styles/host.css");
 
+.loading {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 .page-title {
   display: flex;
   padding-bottom: 30px;
@@ -58,10 +65,10 @@
   padding-top: 45px;
 }
 
-.post + .post .text, .post.post-flip .text {
+.post.post-flip .text {
   order: 1;
 }
 
-.post + .post .img, .post.post-flip .img {
+.post.post-flip .img {
   order: 2;
 }

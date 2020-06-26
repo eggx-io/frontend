@@ -2,11 +2,12 @@
 
 <h1 class="page-title">Projects</h1>
 <div class="content">
+  <h2 class="color-orange">Note: You may not view project details from this site at the moment</h2>
   <div class="filter">
     <h3>Filter:</h3>
   </div>
-  <div class="projects">
-    <a href="/project/{{project._id}}" *ngFor="let project of projects$ | async">
+  <div class="projects" infiniteScroll (scrolled)="onScroll()">
+    <a href="/project/{{project._id}}" *ngFor="let project of projects">
       <div class="project drop-shadow-light">
         <div class="img bg-secondary">
           <img src="{{project.featuredImage}}" *ngIf="project.featuredImage" />
@@ -20,6 +21,9 @@
         <h3>{{project.domain}}</h3>
       </div>
     </a>
+    <div class="loading">
+      <mat-spinner *ngIf="loading"></mat-spinner>
+    </div>
   </div>
 </div>
 

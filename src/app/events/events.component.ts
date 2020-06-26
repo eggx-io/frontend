@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
-import { dateStructure } from '../schemas/-defaults';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Event, EventSearchOptions } from '../schemas/event';
-import { ApiService } from '../api.service';
-import { Observable } from 'rxjs';
+import { ApiService, QueryOptions } from '../api.service';
+import { ObjectId } from '../schemas/-defaults';
 
 @Component({
   selector: 'app-events',
@@ -10,11 +10,23 @@ import { Observable } from 'rxjs';
   styleUrls: ['./events.component.css']
 })
 export class EventsComponent implements OnInit {
-  @Output() events$: Observable<Event[]>
+  @Output() loading: boolean = false
+  @Output() events: Event[] = []
+  @Output() showPopup: boolean
   @Output() popupEvent: Event
   @Input() @Output() form: EventSearchOptions
 
+  static readonly queryProjection: QueryOptions["projection"] = {
+    type: 1,
+    title: 1,
+    blurb: 1,
+    description: 1,
+    schedule: 1
+  }
+
   constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
     private apiService: ApiService
   ) { }
 
@@ -25,22 +37,44 @@ export class EventsComponent implements OnInit {
         start: Date.now()
       }
     }
-    this.doSearch()
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params['event']) {
+        this.doFetch(params['event']);
+      } else {
+        this.doSearch();
+      }
+    });
   }
 
-  filterSearch(): void {}
+  filterSearch(): void { }
 
-  doSearch(skip = undefined) {
-    this.events$ = this.apiService.search('events', this.form, {
+  onScroll() {
+    if (!this.popupEvent) this.doSearch(10);
+  }
+
+  doFetch(id: ObjectId): void {
+    if (this.loading) return;
+    this.loading = true;
+    this.showPopup = true;
+    this.apiService.fetch('event', id, {
+      projection: EventsComponent.queryProjection
+    }).subscribe(event => {
+      this.loading = false;
+      this.popupEvent = event;
+      this.showPopup = event != null;
+    })
+  }
+
+  doSearch(skip = undefined): void {
+    if (this.loading) return;
+    this.loading = true;
+    this.apiService.search('events', this.form, {
       skip: skip,
       limit: 10,
-      projection: {
-        type: 1,
-        title: 1,
-        blurb: 1,
-        description: 1,
-        schedule: 1
-      }
+      projection: EventsComponent.queryProjection
+    }).subscribe(events => {
+      this.events.push(...events);
+      this.loading = false;
     });
   }
 
@@ -55,13 +89,33 @@ export class EventsComponent implements OnInit {
     if (eventType == "workshop") return "color-teal-darker"
   }
 
-  showEvent(eventId): void { }
+  showEvent(event: Event): void {
+    this.showPopup = true;
+    this.popupEvent = event;
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.activatedRoute,
+        queryParams: { event: event._id }
+      });
+  }
 
-  typeIsFiltered(type): boolean {
+  hideEvent(): void {
+    this.showPopup = false;
+    this.popupEvent = null;
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.activatedRoute,
+        queryParams: {}
+      });
+  }
+
+  typeIsFiltered(type: string): boolean {
     return this.form.type.indexOf(type) != -1;
   }
 
-  toggleTypeFilter(type): void {
+  toggleTypeFilter(type: string): void {
     const index = this.form.type.indexOf(type)
     if (index != -1) this.form.type.splice(index, 1)
     else this.form.type.push(type)

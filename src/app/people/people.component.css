@@ -1,12 +1,16 @@
 @import url('../../styles/host.css');
 
-.group {
+.groups {
   display: inline-flex;
   margin-bottom: 25px;
   margin-left: 20px;
 }
 
-.group span {
+.groups .group {
+  display: inline-flex;
+}
+
+.groups .group span {
   cursor: pointer;
 }
 

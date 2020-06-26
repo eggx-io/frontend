@@ -8,6 +8,11 @@ footer {
   background-color: var(--bg-darker);
 }
 
+footer a,
+footer a * {
+  cursor: pointer;
+}
+
 footer .icons {
   display: flex;
 }
@@ -24,7 +29,7 @@ footer .icons .img {
 footer .icons img {
   width: 20px;
   height: 20px;
-  filter: grayscale()
+  filter: grayscale();
 }
 
 footer .icons .img + .img {

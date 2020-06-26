@@ -12,5 +12,6 @@ export class Project extends Schema {
   name: string
   team: ObjectId | Team
   domain: string
+  featuredImage: string
   log?: defaultLog
 }
