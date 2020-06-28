@@ -1,6 +1,8 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Project } from '../schemas/project';
 import { ApiService } from '../api.service';
+import { title } from 'process';
 
 @Component({
   selector: 'app-projects',
@@ -12,10 +14,12 @@ export class ProjectsComponent implements OnInit {
   @Output() projects: Project[] = []
 
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    private titleService: Title
   ) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle("Projects @ Carleton eggX")
     this.doSearch();
   }
 

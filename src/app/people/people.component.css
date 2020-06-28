@@ -1,5 +1,12 @@
 @import url('../../styles/host.css');
 
+.loading {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
 .groups {
   display: inline-flex;
   margin-bottom: 25px;
@@ -22,9 +29,13 @@
   padding: 15px 20px;
 }
 
-.person * {
-  cursor: pointer;
+.person:hover {
+  background-color: var(--bg-secondary);
 }
+
+/* .person * {
+  cursor: pointer;
+} */
 
 .person img {
   width: 100px;

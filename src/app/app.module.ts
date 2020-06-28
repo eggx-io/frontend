@@ -22,6 +22,8 @@ import { ProjectComponent } from './project/project.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ResourcesComponent } from './resources/resources.component';
 import { LandingComponent } from './landing/landing.component';
+import { E404Component } from './e404/e404.component';
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { LandingComponent } from './landing/landing.component';
     ProjectComponent,
     ProjectsComponent,
     ResourcesComponent,
-    LandingComponent
+    LandingComponent,
+    E404Component,
+    PostComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { Location } from '@angular/common';
+import { Title } from '@angular/platform-browser';
 import { Group } from '../schemas/group'
 import { ApiService } from '../api.service';
 
@@ -9,16 +9,24 @@ import { ApiService } from '../api.service';
   styleUrls: ['./people.component.css']
 })
 export class PeopleComponent implements OnInit {
+  @Output() loading: boolean
   @Output() selectedGroup: string = "executives"
-  @Output() groups: Group[]
-  @Output() people: Group["people"]
+  @Output() groups: Group[] = []
+  @Output() people: Group["people"] = []
 
   constructor(
-    private location: Location,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private titleService: Title
   ) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle("People @ Carleton eggX");
+    this.doSearch();
+  }
+
+  doSearch(): void {
+    if (this.loading) return;
+    this.loading = true;
     this.apiService.search('groups', {}, {
       projection: {
         name: 1,
@@ -29,21 +37,30 @@ export class PeopleComponent implements OnInit {
         select: 'avatar profile.firstName profile.lastName'
       }
     }).subscribe(groups => {
-      if (groups) {
-        this.groups = groups;
-        this.people = (
-          groups.find(g => g.name.toLowerCase() == this.selectedGroup)
-          || groups[0]).people;
+      this.groups.splice(0, this.groups.length, ...groups);
+      if (this.groups) {
+        const selectedGroup = this.groups.find(g => g.name.toLowerCase() == this.selectedGroup) || this.groups[0];
+        this.people.splice(
+          0,
+          this.people.length,
+          ...selectedGroup.people
+        );
+        this.titleService.setTitle(`${selectedGroup.name} @ Carleton eggX`)
       }
+      this.loading = false;
     })
   }
 
-  switchGroup(group) {
+  switchGroup(group: string): void {
     if (this.selectedGroup == group) return;
     this.selectedGroup = group.toLowerCase();
-    this.people = this.groups
-      .find(g => g.name.toLowerCase() == this.selectedGroup)
-      .people;
+    const selectedGroup = this.groups.find(g => g.name.toLowerCase() == this.selectedGroup) || this.groups[0];
+    this.people.splice(
+      0,
+      this.people.length,
+      ...selectedGroup.people
+    );
+    this.titleService.setTitle(`${selectedGroup.name} @ Carleton eggX`);
   }
 
 }

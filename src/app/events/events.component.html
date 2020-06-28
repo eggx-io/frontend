@@ -20,8 +20,8 @@
         <span [ngClass]="['event-type', getEventTypeClass(event.type)]">{{event.type}}</span>
       </div>
     </div>
-    <div class="loading">
-      <mat-spinner *ngIf="loading"></mat-spinner>
+    <div class="loading" *ngIf="loading">
+      <mat-spinner></mat-spinner>
     </div>
   </div>
   <div class="search">
@@ -34,12 +34,16 @@
         <input class="btn-primary" (click)="toggleTypeFilter('workshop')" [ngClass]="{'pressed': typeIsFiltered('workshop')}" type="button" value="Workshops" />
       </div>
       <label>Date</label>
-      <div class="list">
-        <div class="item">
-          <label for="dateFrom">From: </label>
-          <input id="dateFrom" type="date">
-        </div>
-      </div>
+      <table class="list">
+        <tr class="item">
+          <td><label for="dateFrom">From: </label></td>
+          <td><input id="dateFrom" type="date"></td>
+        </tr>
+        <tr class="item">
+          <td><label for="dateTo">To: </label></td>
+          <td><input id="dateTo" type="date"></td>
+        </tr>
+      </table>
     </div>
     <!--
       type

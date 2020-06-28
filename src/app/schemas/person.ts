@@ -1,4 +1,4 @@
-import { defaultLog, dateStructure } from './-defaults'
+import { defaultLog, dateStructure, ObjectId } from './-defaults'
 import { Schema } from './-schema'
 
 export interface PersonSearchOptions {

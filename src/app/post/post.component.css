@@ -1,0 +1,22 @@
+@import url("../../styles/host.css");
+
+.loading {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.content .page-title {
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+}
+
+.post {
+  margin: 35px 5% 25px 5%;
+}
+
+.post .img img {
+  width: 320px;
+  object-fit: contain;
+}

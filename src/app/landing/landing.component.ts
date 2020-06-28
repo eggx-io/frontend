@@ -1,4 +1,5 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Post } from '../schemas/post';
 import { ApiService } from '../api.service';
 
@@ -13,10 +14,12 @@ export class LandingComponent implements OnInit {
   @Output() posts: Post[] = []
 
   constructor(
-    private apiService: ApiService
+    private apiService: ApiService,
+    private titleService: Title
   ) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle("Carleton eggX");
     if (this.loading) return;
     this.loading = true;
     const tracker = {

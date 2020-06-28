@@ -1,0 +1,27 @@
+<app-navbar></app-navbar>
+
+<h1 class="page-title" *ngIf="loading" style="text-align:center">opening post...</h1>
+<div class="content loading" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="content" *ngIf="!loading">
+  <h1 class="page-title bg-primary">{{post.title}}</h1>
+  <!-- <div class="details">
+    <span>{{post.log.createdDate | date}}</span>
+    ●
+    <span>{{post.author}} {{post.author}}</span>
+  </div> -->
+  <div class="post">
+    <div class="img">
+      <img src="{{post.featuredImage}}"/>
+    </div>
+    <markdown class="text" [data]="post.content"></markdown>
+    <div class="tags">
+      <a class="tag btn btn-primary" *ngFor="let tag of post.tags" href="/posts?tag={{tag.name}}">
+        {{tag.name}}
+      </a>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

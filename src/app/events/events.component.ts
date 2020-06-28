@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 import { Event, EventSearchOptions } from '../schemas/event';
 import { ApiService, QueryOptions } from '../api.service';
 import { ObjectId } from '../schemas/-defaults';
@@ -27,10 +28,12 @@ export class EventsComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private titleService: Title
   ) { }
 
   ngOnInit(): void {
+    this.titleService.setTitle("Events @ Carleton eggX");
     this.form = {
       type: ["event", "sponsored", "workshop"],
       schedule: {

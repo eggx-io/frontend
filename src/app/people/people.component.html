@@ -1,6 +1,9 @@
 <app-navbar></app-navbar>
 <h1 class="page-title">People</h1>
-<div class="content">
+<div class="content loading" *ngIf="loading">
+  <mat-spinner></mat-spinner>
+</div>
+<div class="content" *ngIf="!loading">
   <div class="groups">
     <div class="group" *ngFor="let group of groups; last as isLast">
       <span (click)="switchGroup(group.name)"
@@ -11,7 +14,7 @@
     </div>
   </div>
   <div *ngFor="let item of people">
-    <div class="person">
+    <div class="person" title="Viewing of individual profiles is disabled for now">
       <img [src]="item.person.avatar" />
       <div class="text">
         <h3>{{item.person.profile.firstName}} {{item.person.profile.lastName}}</h3>
