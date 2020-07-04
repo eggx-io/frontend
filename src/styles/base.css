@@ -7,6 +7,12 @@
 /* custom animation css 'library' */
 @import url("anim.css");
 
+/* ================ media query veriables =================== */
+
+:root {
+  --RtabletWidth: 800px;
+}
+
 /* ================== global selectors ===================== */
 
 * {

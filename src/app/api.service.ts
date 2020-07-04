@@ -83,7 +83,7 @@ export class ApiService {
       `${environment.api_host}/open/fetch/${path}/${id}`, { options: queryOptions }
     ).pipe(
       catchError(this.handleError<T>(`fetch ${path}`)),
-      map((v: T) => environment.production ? v : !!v ? v : this.demoValues[path])
+      map((v: T) => environment.production && !environment.alpha ? v : !!v ? v : this.demoValues[path])
     );
   }
 
@@ -98,11 +98,12 @@ export class ApiService {
    * @param q search query & extra query options
    */
   public search<T extends Schema>(path: string, q: { [key: string]: string | number | boolean }, queryOptions?: QueryOptions & SearchQueryOptions): Observable<T[]> {
+    console.log(`${environment.api_host}/open/search/${path}`, { q: q, options: queryOptions })
     return this.http.post<T[]>(
       `${environment.api_host}/open/search/${path}`, { q: q, options: queryOptions }
     ).pipe(
       catchError(this.handleError<T[]>(`search ${path}`)),
-      map((v: T[]) => environment.production ? v : !!v ? v : this.demoValues[path])
+      map((v: T[]) => environment.production && !environment.alpha ? v : !!v ? v : this.demoValues[path])
     );
   }
 }

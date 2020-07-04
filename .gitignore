@@ -44,3 +44,6 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# skip distribution
+bin/eggx-external.tar.gz
