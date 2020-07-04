@@ -1,4 +1,4 @@
-@import url('../../styles/host.css');
+@import url("../../styles/host.css");
 
 .loading {
   display: flex;
@@ -23,23 +23,32 @@
 
 .person {
   display: flex;
-  box-sizing: content-box;
-  width: 75%;
-  height: 100px;
+  width: 100%;
   padding: 15px 20px;
+  flex-direction: column;
 }
 
 .person:hover {
   background-color: var(--bg-secondary);
 }
 
-/* .person * {
-  cursor: pointer;
-} */
+.person + .person {
+  margin-top: 25px;
+}
+
+.person .sm-name {
+  order: 1;
+}
+
+.person .md-name {
+  display: none;
+}
 
 .person img {
-  width: 100px;
-  margin-right: 10px;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  order: 2;
   object-fit: contain;
   object-position: center;
 }
@@ -47,9 +56,36 @@
 .person .text {
   display: flex;
   flex-grow: 1;
+  order: 3;
   flex-direction: column;
 }
 
-.person + .person {
-  margin-top: 15px;
+@media only screen and (min-width: 760px) {
+  .person {
+    box-sizing: content-box;
+    width: 75%;
+    height: 100px;
+    flex-direction: row;
+  }
+
+  .person + .person {
+    margin-top: 15px;
+  }
+
+  .person img {
+    width: 100px;
+    margin: 0 10px 0;
+  }
+
+  .person .sm-name {
+    display: none;
+  }
+
+  .person .md-name {
+    display: unset;
+  }
+
+  .person .text {
+    padding-top: 5px;
+  }
 }

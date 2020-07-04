@@ -12,8 +12,6 @@ FOLDER=eggx-external
 FILE=bin/eggx-external_dist.tar.gz
 CONFIG=app.yaml
 
-rm $FILE
-
 ng build --prod
 
 echo "Compressing..."

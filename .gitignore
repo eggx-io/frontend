@@ -46,4 +46,4 @@ testem.log
 Thumbs.db
 
 # skip distribution
-bin/eggx-external.tar.gz
+bin/*_dist*

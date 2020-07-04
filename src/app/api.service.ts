@@ -83,7 +83,7 @@ export class ApiService {
       `${environment.api_host}/open/fetch/${path}/${id}`, { options: queryOptions }
     ).pipe(
       catchError(this.handleError<T>(`fetch ${path}`)),
-      map((v: T) => environment.production && !environment.alpha ? v : !!v ? v : this.demoValues[path])
+      map((v: T) => environment.production && !environment.beta ? v : !!v ? v : this.demoValues[path])
     );
   }
 
@@ -98,12 +98,11 @@ export class ApiService {
    * @param q search query & extra query options
    */
   public search<T extends Schema>(path: string, q: { [key: string]: string | number | boolean }, queryOptions?: QueryOptions & SearchQueryOptions): Observable<T[]> {
-    console.log(`${environment.api_host}/open/search/${path}`, { q: q, options: queryOptions })
     return this.http.post<T[]>(
       `${environment.api_host}/open/search/${path}`, { q: q, options: queryOptions }
     ).pipe(
       catchError(this.handleError<T[]>(`search ${path}`)),
-      map((v: T[]) => environment.production && !environment.alpha ? v : !!v ? v : this.demoValues[path])
+      map((v: T[]) => environment.production && !environment.beta ? v : v ? v : this.demoValues[path])
     );
   }
 }
@@ -150,7 +149,7 @@ class DemoValues {
             firstName: "Exec",
             lastName: "Member"
           },
-          avatar: "https://images.unsplash.com/photo-1495615080073-6b89c9839ce0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60"
+          avatar: "assets/square.jpg"
         },
         tagline: "This is our vice president, he's really cool! There isn't much else to add here, "
           + "I guess the exec could include a short message about what they like and why they're here but whatever."
@@ -163,7 +162,7 @@ class DemoValues {
             firstName: "Alumni",
             lastName: "Student"
           },
-          avatar: "https://images.unsplash.com/photo-1495615080073-6b89c9839ce0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60"
+          avatar: "assets/square.jpg"
         },
         tagline: "This is our vice president, he's really cool! There isn't much else to add here, "
           + "I guess the exec could include a short message about what they like and why they're here but whatever."
@@ -183,7 +182,7 @@ class DemoValues {
           firstName: "Exec",
           lastName: "Member"
         },
-        avatar: "https://images.unsplash.com/photo-1495615080073-6b89c9839ce0?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60",
+        avatar: "assets/square.jpg",
         log: {
           createdDate: Date.now()
         }
@@ -196,7 +195,7 @@ class DemoValues {
         When our sibling website is completed (share.eggx.io), this website will become populated with real information. \
         Thank you for your patience.",
       content: markdownExample,
-      featuredImage: "https://images.unsplash.com/photo-1485083269755-a7b559a4fe5e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=600&q=60",
+      featuredImage: "assets/construction.jpg",
       spotlight: true,
       tags: []
     }, {
@@ -205,7 +204,7 @@ class DemoValues {
       author: objectidExample,
       blurb: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In commodo blandit lorem, eu faucibus mi sodales in. Suspendisse nec",
       content: markdownExample,
-      featuredImage: "https://images.unsplash.com/photo-1556742111-a301076d9d18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+      featuredImage: "assets/payment.jpg",
       spotlight: false,
       tags: []
     }, {
@@ -214,7 +213,7 @@ class DemoValues {
       author: objectidExample,
       blurb: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In commodo blandit lorem, eu faucibus mi sodales in. Suspendisse nec",
       content: markdownExample,
-      featuredImage: "https://images.unsplash.com/photo-1556742111-a301076d9d18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+      featuredImage: "assets/payment.jpg",
       spotlight: false,
       tags: []
     }, {
@@ -223,7 +222,7 @@ class DemoValues {
       author: objectidExample,
       blurb: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In commodo blandit lorem, eu faucibus mi sodales in. Suspendisse nec",
       content: markdownExample,
-      featuredImage: "https://images.unsplash.com/photo-1556742111-a301076d9d18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+      featuredImage: "assets/payment.jpg",
       spotlight: false,
       tags: []
     }]
@@ -245,7 +244,7 @@ class DemoValues {
           members,
           mentor: "adwa"
         },
-        featuredImage: "https://images.unsplash.com/photo-1556742111-a301076d9d18?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80",
+        featuredImage: "assets/payment.jpg",
         domain: domains[i % 3]
       })
     }

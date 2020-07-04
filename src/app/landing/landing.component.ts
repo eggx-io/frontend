@@ -35,6 +35,7 @@ export class LandingComponent implements OnInit {
         featuredImage: 1
       }
     }).subscribe(([spotlightPost]) => {
+      console.log(spotlightPost)
       this.spotlightPost = spotlightPost
       if (tracker.doneInitialPosts) {
         this.loading = false;
@@ -61,6 +62,7 @@ export class LandingComponent implements OnInit {
         featuredImage: 1
       }
     }).subscribe(posts => {
+      console.log(posts)
       this.posts.push(...posts);
       if (tracker) {
         if (tracker.doneSpotlightPost) {

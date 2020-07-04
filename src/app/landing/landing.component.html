@@ -1,8 +1,9 @@
 <app-navbar></app-navbar>
 
 <div class="page-title post post-flip" *ngIf="spotlightPost">
+  <h1 class="sm-title">{{spotlightPost.title}}</h1>
   <div class="text">
-    <h1>{{spotlightPost.title}}</h1>
+    <h1 class="md-title">{{spotlightPost.title}}</h1>
     <p class="blurb">{{spotlightPost.blurb}}</p>
     <a href="/post/{{spotlightPost._id}}">
       <button class="btn-primary">
@@ -16,8 +17,9 @@
 </div>
 <div class="content" infiniteScroll (scrolled)="onScroll()">
   <div class="post" *ngFor="let post of posts; index as i" [ngClass]="{'post-flip': i % 2 == 1}">
+    <h1 class="sm-title">{{post.title}}</h1>
     <div class="text">
-      <h1>{{post.title}}</h1>
+      <h1 class="md-title">{{post.title}}</h1>
       <p>{{post.blurb}}</p>
       <a class="btn-inverse" href="/post/{{post._id}}">
         {{post.callToAction ? post.callToAction : 'Learn more'}}

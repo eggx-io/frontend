@@ -33,7 +33,6 @@ export class EventsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.titleService.setTitle("Events @ Carleton eggX");
     this.form = {
       type: ["event", "sponsored", "workshop"],
       schedule: {
@@ -44,6 +43,7 @@ export class EventsComponent implements OnInit {
       if (params['event']) {
         this.doFetch(params['event']);
       } else {
+        this.titleService.setTitle("Events @ Carleton eggX");
         this.doSearch();
       }
     });
@@ -65,6 +65,9 @@ export class EventsComponent implements OnInit {
       this.loading = false;
       this.popupEvent = event;
       this.showPopup = event != null;
+      if (event != null) {
+        this.titleService.setTitle(`${event.title} - Event @ Carleton eggX`)
+      }
     })
   }
 
@@ -112,6 +115,7 @@ export class EventsComponent implements OnInit {
         relativeTo: this.activatedRoute,
         queryParams: {}
       });
+    this.titleService.setTitle("Events @ Carleton eggX");
   }
 
   typeIsFiltered(type: string): boolean {

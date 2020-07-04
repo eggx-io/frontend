@@ -10,16 +10,31 @@
 .page-title {
   display: flex;
   padding-bottom: 30px;
+  flex-direction: column;
 }
 
-.page-title .text {
-  width: 50%;
-}
+@media only screen and (min-width: 760px) {
+  .page-title {
+    flex-direction: row;
+  }
 
-.page-title .img {
-  width: 45%;
-  min-height: 300px;
-  max-height: 100vh;
+  .page-title .sm-title {
+    display: none;
+  }
+
+  .page-title .md-title {
+    display: unset;
+  }
+
+  .page-title .text {
+    width: 50%;
+  }
+
+  .page-title .img {
+    width: 45%;
+    min-height: 300px;
+    max-height: 100vh;
+  }
 }
 
 .content {
@@ -30,45 +45,93 @@
   display: flex;
   padding-top: 30px;
   padding-bottom: 30px;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-}
-
-.post .text {
-  order: 2;
-  width: 40%;
-  margin-right: 3%;
-  margin-left: 3%;
-}
-
-.post .text .blurb {
-  margin-bottom: 20px;
-}
-
-.post .img {
-  display: inline-flex;
-  order: 1;
-  width: 27%;
-  height: 250px;
-  border-radius: 2px;
-  align-items: center;
-}
-
-.post .img img {
-  width: 100%;
-  max-height: 100%;
-  border: 0.5px dashed var(--color-primary);
-  border-radius: 2px;
 }
 
 .post + .post {
   padding-top: 45px;
 }
 
-.post.post-flip .text {
+.post .sm-title {
   order: 1;
 }
 
-.post.post-flip .img {
+.post .md-title {
+  display: none;
+}
+
+.post .img {
   order: 2;
+}
+
+.post .img img {
+  width: 100%;
+  margin-bottom: 16px;
+  object-fit: contain;
+}
+
+.post .text {
+  margin-bottom: 16px;
+  order: 3;
+}
+
+.post .text a {
+  margin-top: 16px;
+}
+
+@media only screen and (min-width: 760px) {
+  .post {
+    flex-direction: row;
+  }
+
+  .post .sm-title {
+    display: none;
+  }
+
+  .post .md-title {
+    display: unset;
+  }
+
+  .post .text {
+    display: flex;
+    order: 2;
+    width: 40%;
+    margin-right: 3%;
+    margin-left: 3%;
+    flex-direction: column;
+  }
+
+  .post .text a {
+    width: fit-content;
+  }
+
+  .post .text .blurb {
+    margin-bottom: 20px;
+  }
+
+  .post .img {
+    display: inline-flex;
+    order: 1;
+    width: 27%;
+    height: 250px;
+    border-radius: 2px;
+    align-items: center;
+  }
+
+  .post .img img {
+    width: 100%;
+    max-height: 100%;
+    border: 0.5px dashed var(--color-primary);
+    border-radius: 2px;
+  }
+
+  .post.post-flip .text {
+    order: 1;
+  }
+
+  .post.post-flip .img {
+    order: 2;
+  }
 }

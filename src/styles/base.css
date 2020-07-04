@@ -7,12 +7,6 @@
 /* custom animation css 'library' */
 @import url("anim.css");
 
-/* ================ media query veriables =================== */
-
-:root {
-  --RtabletWidth: 800px;
-}
-
 /* ================== global selectors ===================== */
 
 * {
@@ -75,9 +69,11 @@ input[type="button"].pressed {
   color: var(--color-inverse);
 }
 
-button i {
+button i,
+.btn i,
+input[type="button"] i {
   margin-right: 5px;
-  font-size: 16px !important;
+  font-size: 20px !important;
   cursor: pointer !important;
 }
 
@@ -261,7 +257,7 @@ ul {
 
 #infoPopup .info-popup {
   display: flex;
-  width: calc(70% + 30px);
+  width: 100%;
   height: fit-content;
   margin-bottom: 20px;
   padding: 15px 0 15px 15px;
@@ -284,8 +280,10 @@ ul {
   display: flex;
   width: 100%;
   padding: 7px 10px 0 10px;
+  flex-direction: column-reverse;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  align-items: flex-end;
   font-size: 18px;
 }
 
@@ -309,6 +307,13 @@ ul {
 
 #infoPopup .dismiss {
   width: 50%;
+}
+
+@media only screen and (min-width: 760px) {
+  #infoPopup .info-popup .header {
+    flex-direction: row;
+    align-items: flex-start;
+  }
 }
 
 /* ================== page selectors ===================== */
@@ -482,9 +487,12 @@ ul {
   color: var(--color-black);
 }
 
-.btn-accent:hover,
-.btn-accent:hover > i {
+.btn-accent:hover {
   background-color: var(--color-teal-lighter) !important;
+  color: var(--color-black);
+}
+
+.btn-accent:hover > i {
   color: var(--color-black);
 }
 
@@ -632,7 +640,6 @@ ul {
 
 .popup {
   display: flex;
-  padding: 20px;
   position: fixed;
   top: 0;
   left: 0;
@@ -665,6 +672,12 @@ ul {
   padding: 6px 10px;
   border-radius: 10px;
   text-align: center;
+}
+
+@media only screen and (min-width: 760px) {
+  .popup {
+    padding: 20px;
+  }
 }
 
 .error-popup {

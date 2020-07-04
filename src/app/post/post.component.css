@@ -16,7 +16,17 @@
   margin: 35px 5% 25px 5%;
 }
 
+.post .img {
+  margin-bottom: 24px;
+}
+
 .post .img img {
-  width: 320px;
+  width: 100%;
   object-fit: contain;
+}
+
+@media only screen and (min-width: 760px) {
+  .post .img img {
+    width: 320px;
+  }
 }

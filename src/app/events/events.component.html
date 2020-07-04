@@ -50,6 +50,7 @@
       schedule
       people
      -->
+    <div class="divider"></div>
   </div>
 </div>
 <div id="infoPopup" (click)="hideEvent()" class="popup" *ngIf="showPopup">
@@ -67,7 +68,7 @@
             </span>
           </div>
         </div>
-        <button class="btn-primary" (click)="hideEvent()">
+        <button class="close btn-primary" (click)="hideEvent()">
           <i class="material-icons">close</i>
           Close
         </button>

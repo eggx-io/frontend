@@ -1,24 +1,31 @@
 <div id="navbar" class="bg-accent" [ngClass]="{'drop-shadow': showDropShadow}">
   <a href="/"><img src="assets/eggx-logo-text.svg"></a>
   <div class="menu">
-    <a href="/about" class="btn btn-primary btn-accent">
-      About
-    </a>
-    <a href="/people" class="btn btn-primary btn-accent">
-      People
-    </a>
-    <a href="/events" class="btn btn-primary btn-accent">
-      Events
-    </a>
-    <a href="/projects" class="btn btn-primary btn-accent">
-      Projects
-    </a>
-    <a href="/resources" class="btn btn-primary btn-accent">
-      Resources
+    <a href="{{item.href}}" class="btn btn-primary btn-accent" *ngFor="let item of menuItems">
+      {{item.name}}
     </a>
   </div>
   <div class="actions">
-    <a href="https://share.eggx.io" class="material-icons btn btn-accent">person</a>
+    <a href="https://share.eggx.io" class="btn btn-accent">
+      <i class="material-icons">person</i>
+      Me
+    </a>
     <!-- <i class="material-icons">search</i> -->
+    <a class="menu-icon btn btn-accent" (click)="menuOpen = true">
+      <i class="material-icons">menu</i>
+      Menu
+    </a>
+  </div>
+  <div class="small-menu bg-primary" [ngClass]="{'open': menuOpen}">
+    <div class="close">
+      <div class="btn btn-primary" (click)="menuOpen = false">
+        <i class="material-icons">close</i>
+        close
+      </div>
+    </div>
+    <div class="item" *ngFor="let item of menuItems; last as isLast">
+      <a href="{{item.href}}" class="btn">{{item.name}}</a>
+      <div class="divider" *ngIf="!isLast"></div>
+    </div>
   </div>
 </div>

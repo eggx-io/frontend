@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  alpha: true,
+  beta: true,
   api_host: 'https://api.eggx.io'
 };
