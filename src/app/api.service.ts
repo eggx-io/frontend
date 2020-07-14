@@ -194,7 +194,7 @@ class DemoValues {
         That is because we don't yet have any real data to show. \
         When our sibling website is completed (share.eggx.io), this website will become populated with real information. \
         Thank you for your patience.",
-      content: markdownExample,
+      content: eggxIntro,
       featuredImage: "assets/construction.jpg",
       spotlight: true,
       tags: []
@@ -286,3 +286,18 @@ def hello(wow):\n\
 \tprint(hi_text)\n\
 \traise ValueError('what?')\n\
 ```"
+
+const eggxIntro = "\
+# What is eggX\n\
+\n\
+eggX is the short-name of Carleton eggX. Well what is that? We're a Carleton University-based club dedicated to the pursuit of proper software and are led by a group of students who've had experience writing and using software.\n\
+\n\
+## Bootstrapping students into the world of code\n\
+\n\
+That's our tagline. We know that as Computer Science (or even non-CS) majors, projects are an exceptional way to prove your experience in the field.\n\
+\n\
+That's why our founders decided to foster an environment where students of all levels can come together to share their love for digital technology.\n\
+\n\
+We invite you to come along with us on our journey. It doesn't matter what your major is, after all, we're all heavy users of software in one way or another -- whether it be social media or banking or whatever. \
+If you're interested in the details of what we're about, checkout our [about page](/about)\n\
+"

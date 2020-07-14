@@ -99,7 +99,7 @@ h1 {
 h2 {
   margin-top: 0;
   margin-bottom: 5px;
-  font: 500 24px "Roboto", "Montserrat", "Gotham Light Regular", sans-serif !important;
+  font: 500 24px "Montserrat", "Gotham Light Regular", sans-serif !important;
 }
 
 h3 {
@@ -121,6 +121,15 @@ input {
   color: var(--color-primary);
 }
 
+p {
+  font-size: 16px;
+}
+
+p + h2 {
+  margin-top: 24px !important;
+  margin-bottom: 24px !important;
+}
+
 section {
   margin-bottom: 40px;
 }
@@ -132,10 +141,6 @@ table td {
 table .error,
 form .error {
   color: #ff0000;
-}
-
-ul {
-  list-style-type: none;
 }
 
 /* =============== feedback selectors ======================= */

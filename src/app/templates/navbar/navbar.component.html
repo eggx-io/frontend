@@ -1,7 +1,7 @@
 <div id="navbar" class="bg-accent" [ngClass]="{'drop-shadow': showDropShadow}">
   <a href="/"><img src="assets/eggx-logo-text.svg"></a>
   <div class="menu">
-    <a href="{{item.href}}" class="btn btn-primary btn-accent" *ngFor="let item of menuItems">
+    <a href="{{item.href}}" class="btn btn-accent" *ngFor="let item of menuItems">
       {{item.name}}
     </a>
   </div>

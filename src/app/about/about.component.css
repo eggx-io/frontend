@@ -1,16 +1,15 @@
 @import url("../../styles/host.css");
 
-.video {
+.banner {
   display: flex;
-  width: 100%;
-  height: 300px;
   margin-bottom: 5%;
   justify-content: center;
   align-items: center;
   overflow: hidden;
 }
 
-.video video {
+.banner img {
   width: 100%;
   object-position: center;
+  object-fit: contain;
 }
