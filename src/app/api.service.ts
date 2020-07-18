@@ -131,44 +131,25 @@ class DemoValues {
   })()
   event = this.events[0]
   groups: Group[] = (() => {
-    const exec = {
-      name: "Executives",
-      people: []
-    }
-    const alum = {
-      name: "Alumni",
+    const mentors = {
+      name: 'Mentors',
       people: []
     }
     for (let i = 1; i <= 5; ++i) {
-      exec.people.push({
-        title: "Vice-President",
+      mentors.people.push({
         person: {
           _id: objectidExample,
           email: "",
           profile: {
-            firstName: "Exec",
-            lastName: "Member"
+            firstName: "Coding",
+            lastName: "Mentor"
           },
           avatar: "assets/square.jpg"
         },
-        tagline: "This is our vice president, he's really cool! There isn't much else to add here, "
-          + "I guess the exec could include a short message about what they like and why they're here but whatever."
-      })
-      alum.people.push({
-        person: {
-          _id: objectidExample,
-          email: "",
-          profile: {
-            firstName: "Alumni",
-            lastName: "Student"
-          },
-          avatar: "assets/square.jpg"
-        },
-        tagline: "This is our vice president, he's really cool! There isn't much else to add here, "
-          + "I guess the exec could include a short message about what they like and why they're here but whatever."
+        tagline: "This is a tagline. Person's description will go here."
       })
     }
-    return [exec, alum]
+    return [execs, mentors]
   })()
   group = this.groups[0]
   posts: Post[] = (() => {
@@ -301,3 +282,114 @@ That's why our founders decided to foster an environment where students of all l
 We invite you to come along with us on our journey. It doesn't matter what your major is, after all, we're all heavy users of software in one way or another -- whether it be social media or banking or whatever. \
 If you're interested in the details of what we're about, checkout our [about page](/about)\n\
 "
+
+const execs: Group = {
+  name: 'Executives',
+  people: [
+    {
+      title: 'Co-President',
+      person: {
+        email: '',
+        profile: {
+          firstName: 'Victor',
+          lastName: 'Olaitan'
+        },
+        avatar: "assets/execs/volaitan.jpg"
+      },
+      tagline: "\
+This is Victor, he's one of our co-presidents. Victor is in his fourth year studying \
+computer science in the software engineering stream. Victor loves spending his free time \
+writing code and contemplating what the future will look like (he's a real nerd!) But \
+he also loves to engage with people of different backgrounds and have lengthy discussions \
+on anything under the sun. Victor is experienced in cloud software development and is \
+currently working as a DevOps co-op!"
+    },
+    {
+      title: 'Co-President',
+      person: {
+        email: '',
+        profile: {
+          firstName: 'Sebastian',
+          lastName: 'Gadzinski'
+        },
+        avatar: "assets/execs/sgadzinski.svg"
+      },
+      tagline: "\
+Sebastian is working in the forest right now and so couldn't submit an intro \
+but here's one for him. Sebastian is one of our co-presidents. He's in his fourth year \
+of computer science in the software engineering stream with a minor in mathematics. In \
+his free time he likes to workout and write Android apps! I'll leave the intro there for \
+now and let him introduce himself later."
+    },
+    {
+      title: 'Engagement Officer',
+      person: {
+        email: '',
+        profile: {
+          firstName: 'Kartikeyee',
+          lastName: 'Gurav'
+        },
+        avatar: "assets/execs/kgurav.jpg"
+      },
+      tagline: "\
+Kartikeyee (KT) is studying Computer Science and is in his fourth year. \
+KT likes to spend his time watching soccer, cooking and enjoying the patio \
+season! He likes to get involved in local communities and organisations. \
+Kartikeyee is passionate about new developments in the tech industry and \
+also enjoys current affairs! (And he doesn't believe pineapple belongs on \
+pizza) 😃"
+    },
+    {
+      title: 'Finance Officer',
+      person: {
+        email: '',
+        profile: {
+          firstName: 'Sakina',
+          lastName: 'Janmohamed'
+        },
+        avatar: "assets/execs/sjanmohamed.jpg"
+      },
+      tagline: "\
+This is Sakina, she's our finance officer. Sakina is in her third year of \
+Commerce with a concentration in Accounting. Sakina is passionate about making \
+a positive impact in people's lives. She's also expericed in the art of \
+communicatation and problem solving."
+    },
+    {
+      title: 'Marketing Officer',
+      person: {
+        email: '',
+        profile: {
+          firstName: 'Shumbham',
+          lastName: 'Sharan'
+        },
+        avatar: "assets/execs/ssharan.jpg"
+      },
+      tagline: "\
+This is Shubham Sharan, he's our marketing officer. Shubham is currently \
+in his 3rd year of a Bachelor's in Computer Science with a minor in \
+statistics. He really enjoys photography and he has over 3 million \
+views on Unsplash! Shubham started his journey of design about 3 years ago \
+and has worked with magazine publishers, startups & developers to create \
+storyboards, products, articles and app designs!"
+    },
+    {
+      title: 'Projects Officer',
+      person: {
+        email: '',
+        profile: {
+          firstName: 'Tanner',
+          lastName: 'Young'
+        },
+        avatar: "assets/execs/tyoung.jpg"
+      },
+      tagline: "\
+Tanner is studying international business and is in his 4th year. Tanner \
+likes to spend his free time playing video games and loves cooking and learning \
+about various culinary cultures. Tanner is interested in progressive and \
+ethical change in business. He is experiened in international management & \
+finance and recently worked on several research papers/projects notably on \
+banking innovation as well as data & AI in business."
+    }
+  ]
+}

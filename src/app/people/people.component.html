@@ -13,12 +13,16 @@
       <div *ngIf="!isLast" class="vertical-divider"></div>
     </div>
   </div>
-  <div *ngFor="let item of people">
-    <div class="person" title="Viewing of individual profiles is disabled for now">
+  <div class="people">
+    <div class="person" *ngFor="let item of people" title="Viewing of individual profiles is disabled for now">
       <h3 class="sm-name">{{item.person.profile.firstName}} {{item.person.profile.lastName}}</h3>
-      <img [src]="item.person.avatar" />
+      <h4 class="sm-title" *ngIf="item.title">{{item.title}}</h4>
+      <div class="img">
+        <img [src]="item.person.avatar" />
+      </div>
       <div class="text">
         <h3 class="md-name">{{item.person.profile.firstName}} {{item.person.profile.lastName}}</h3>
+        <h4 class="md-title" *ngIf="item.title">{{item.title}}</h4>
         <p>{{item.tagline}}</p>
       </div>
     </div>
