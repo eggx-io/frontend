@@ -360,7 +360,7 @@ communicatation and problem solving."
       person: {
         email: '',
         profile: {
-          firstName: 'Shumbham',
+          firstName: 'Shubham',
           lastName: 'Sharan'
         },
         avatar: "assets/execs/ssharan.jpg"
