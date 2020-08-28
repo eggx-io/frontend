@@ -12,7 +12,7 @@ export class NavbarComponent implements OnInit {
     {name: 'About', href: '/about'},
     {name: 'People', href: '/people'},
     {name: 'Events', href: '/events'},
-    {name: 'Projects', href: '/projects'},
+    // {name: 'Projects', href: '/projects'},
     {name: 'Resources', href: '/resources'}
   ]
 

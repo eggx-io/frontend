@@ -3,7 +3,7 @@ import { Schema } from './-schema'
 import { Person } from './person'
 
 export interface EventSearchOptions {
-  type?: string[]
+  type?: ('event' | 'workshop' | 'sponsored' | string)[]
   title?: string
   schedule?: {
     start?: number
@@ -17,7 +17,7 @@ export interface EventSearchOptions {
 }
 
 export class Event extends Schema {
-  type: string
+  type: 'event' | 'workshop' | 'sponsored' | string
   title: string
   blurb: string
   description: string
