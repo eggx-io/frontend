@@ -20,7 +20,7 @@
   padding-bottom: 30px;
   flex-direction: column;
   justify-content: center;
-  background-image: url('assets/landing-code-snip.png');
+  background-image: url('../../assets/landing-code-snip.png');
   background-size: cover;
 }
 
