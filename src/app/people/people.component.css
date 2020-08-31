@@ -96,8 +96,8 @@
   }
 }
 
-@media only screen and (min-width: 900px) {
+@media only screen and (min-width: 1080px) {
   .person {
-    width: 75%;
+    width: 85%;
   }
 }

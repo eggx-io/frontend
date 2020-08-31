@@ -17,7 +17,7 @@ import { Draft, DraftSearchOptions } from './schemas/draft';
 
 
 export interface QueryOptions {
-  populate?: QueryPopulateOptions | QueryPopulateOptions[],
+  populate?: QueryPopulateOptions[],
   projection?: { [include: string]: 1 } | { [exclude: string]: 0 }
 }
 
@@ -119,7 +119,7 @@ export class ApiService {
     options?: ModelUpdateOptions
   ): Observable<T> {
     return this.http.post<T>(
-      `${environment.api_host}/admin/update/${path}`, { conditions, doc, options: options }
+      `${environment.api_host}/admin/update/${path}`, { conditions, doc, options: {...options, find: true} }
     ).pipe(
       catchError(this.handleError<T>(`findOneAndUpdate ${path}`)),
       map((v: T) => environment.production || !environment.beta ? v : this.demoValues[path])
@@ -223,12 +223,10 @@ class DemoValues {
         }
       },
       blurb: "\
-        Thank you for taking an interest in Carleton eggX Share. \
-        Our website is currently under development. \
-        You will notice a lot of placeholder text around the website. \
-        That is because we don't yet have any real data to show. \
-        When our sibling website is completed (share.eggx.io), this website will become populated with real information. \
-        Thank you for your patience.",
+Thank you for taking an interest in Carleton eggX. Our website is currently under development. \
+You will notice some placeholder text around the website. That is because we're still \
+updating our database with real data. Once we're done with that process, this website will \
+become fully populated with real information. Thank you for your patience.",
       content: markdownExample,
       featuredImage: "assets/construction.jpg",
       spotlight: true,

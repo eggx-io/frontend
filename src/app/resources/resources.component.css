@@ -32,7 +32,7 @@
 
 .resource .img i {
   display: inline-flex;
-  font-size: 60px;
+  font-size: 3.75rem;
   justify-content: center;
   align-items: center;
 }

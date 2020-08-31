@@ -1,5 +1,5 @@
 <div id="navbar" class="bg-accent" [ngClass]="{'drop-shadow': showDropShadow}">
-  <a href="/"><img src="assets/eggx-logo-text.svg"></a>
+  <a href="/"><img src="assets/eggx-logo-text.svg" alt="eggX Logo"></a>
   <div class="menu">
     <a href="{{item.href}}" class="btn btn-accent" *ngFor="let item of menuItems">
       {{item.name}}
@@ -23,9 +23,14 @@
         close
       </div>
     </div>
-    <div class="item" *ngFor="let item of menuItems; last as isLast">
-      <a href="{{item.href}}" class="btn">{{item.name}}</a>
-      <div class="divider" *ngIf="!isLast"></div>
+    <div class="items">
+      <div class="item" *ngFor="let item of menuItems; last as isLast">
+        <a href="{{item.href}}" class="btn">{{item.name}}</a>
+        <div class="divider" *ngIf="!isLast"></div>
+      </div>
+      <div class="img">
+        <a href="/"><img src="assets/eggx-logo-text.svg" alt="eggX Logo"></a>
+      </div>
     </div>
   </div>
 </div>

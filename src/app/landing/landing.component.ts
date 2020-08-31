@@ -10,7 +10,6 @@ import { ApiService } from '../api.service';
 })
 export class LandingComponent implements OnInit {
   @Output() loading: boolean
-  @Output() spotlightPost: Post
   @Output() posts: Post[] = []
 
   constructor(
@@ -19,40 +18,16 @@ export class LandingComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.titleService.setTitle("Carleton eggX");
-    if (this.loading) return;
-    this.loading = true;
-    const tracker = {
-      doneSpotlightPost: false,
-      doneInitialPosts: false
-    };
-    this.apiService.search("posts", { spotlight: true }, {
-      limit: 1,
-      projection: {
-        title: 1,
-        blurb: 1,
-        callToAction: 1,
-        featuredImage: 1
-      }
-    }).subscribe(([spotlightPost]) => {
-      console.log(spotlightPost)
-      this.spotlightPost = spotlightPost
-      if (tracker.doneInitialPosts) {
-        this.loading = false;
-      } else {
-        tracker.doneSpotlightPost = true;
-      }
-    })
-    this.doSearch(tracker);
+    this.titleService.setTitle("This is Carleton eggX");
+    this.doSearch();
   }
 
   onScroll(): void {
     this.doSearch();
   }
 
-  doSearch(tracker = undefined): void {
-    if (this.loading && !tracker) return;
-    if (!tracker) this.loading = true;
+  doSearch(): void {
+    if (this.loading) return;
     this.apiService.search("posts", {}, {
       limit: 5,
       projection: {
@@ -62,17 +37,8 @@ export class LandingComponent implements OnInit {
         featuredImage: 1
       }
     }).subscribe(posts => {
-      console.log(posts)
       this.posts.push(...posts);
-      if (tracker) {
-        if (tracker.doneSpotlightPost) {
-          this.loading = false;
-        } else {
-          tracker.doneInitialPosts = true;
-        }
-      } else {
-        this.loading = false;
-      }
+      this.loading = false;
     })
   }
 

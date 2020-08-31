@@ -1,4 +1,3 @@
-<app-navbar></app-navbar>
 <h1 class="page-title">People</h1>
 <div class="content loading" *ngIf="loading">
   <mat-spinner></mat-spinner>
@@ -14,11 +13,11 @@
     </div>
   </div>
   <div class="people">
-    <div class="person" *ngFor="let item of people" title="Viewing of individual profiles is disabled for now">
+    <div class="person" *ngFor="let item of people">
       <h3 class="sm-name">{{item.person.profile.firstName}} {{item.person.profile.lastName}}</h3>
       <h4 class="sm-title" *ngIf="item.title">{{item.title}}</h4>
       <div class="img">
-        <img [src]="item.person.avatar" />
+        <img [src]="item.person.avatar" [alt]="item.person.profile.firstName + ' ' + item.person.profile.lastName + ' Bitmoji'" />
       </div>
       <div class="text">
         <h3 class="md-name">{{item.person.profile.firstName}} {{item.person.profile.lastName}}</h3>
@@ -28,4 +27,3 @@
     </div>
   </div>
 </div>
-<app-footer></app-footer>

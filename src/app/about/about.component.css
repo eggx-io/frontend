@@ -3,13 +3,13 @@
 .banner {
   display: flex;
   margin-bottom: 5%;
-  justify-content: center;
   align-items: center;
   overflow: hidden;
 }
 
 .banner img {
   width: 100%;
-  object-position: center;
+  max-height: 300px;
+  object-position: left;
   object-fit: contain;
 }

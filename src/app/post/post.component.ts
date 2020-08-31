@@ -34,9 +34,9 @@ export class PostComponent implements OnInit {
     if (this.loading) return;
     this.loading = true;
     this.apiService.fetch('post', postId, {
-      populate: {
+      populate: [{
         path: 'author'
-      },
+      }],
       projection: {
         author: 1,
         title: 1,

@@ -1,4 +1,5 @@
 
+/** number milliseconds since epoch */
 export interface dateStructure extends Number { }
 
 export interface scheduleStructure {

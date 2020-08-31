@@ -20,8 +20,8 @@ export class Person extends Schema {
       country: string
     }
   }
-  log?: defaultLog & {
+  log?: Partial<defaultLog & {
     joinedDate?: dateStructure
-  }
+  }>
   pendingDeletion?: boolean
 }

@@ -1,5 +1,3 @@
-<app-navbar></app-navbar>
-
 <h1 class="page-title" *ngIf="loading" style="text-align:center">opening post...</h1>
 <div class="content loading" *ngIf="loading">
   <mat-spinner></mat-spinner>
@@ -13,7 +11,7 @@
   </div> -->
   <div class="post">
     <div class="img">
-      <img src="{{post.featuredImage}}"/>
+      <img src="{{post.featuredImage}}" alt="Post Featured Image" />
     </div>
     <markdown class="text" [data]="post.content"></markdown>
     <div class="tags">
@@ -24,4 +22,3 @@
   </div>
 </div>
 
-<app-footer></app-footer>

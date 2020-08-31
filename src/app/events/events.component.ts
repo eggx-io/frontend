@@ -57,6 +57,86 @@ export class EventsComponent implements OnInit {
     if (!this.popupEvent) this.doSearch(this.loadedIndex);
   }
 
+  doFetch(id: ObjectId): void {
+    if (this.loading) return;
+    this.loading = true;
+    this.showPopup = true;
+    this.apiService.fetch('event', id, {
+      projection: EventsComponent.queryProjection
+    }).subscribe(event => {
+      this.loading = false;
+      this.popupEvent = event;
+      this.showPopup = event != null;
+      if (event != null) {
+        this.titleService.setTitle(`${event.title} - Event @ Carleton eggX`)
+      }
+    })
+  }
+
+  doSearch(skip: number): void {
+    if (this.loading) return;
+    this.loading = true;
+    this.loadedIndex = skip
+    this.apiService.search('events', this.form, {
+      sort: {'schedule.start': 1},
+      skip,
+      limit: 10,
+      projection: EventsComponent.queryProjection
+    }).subscribe(events => {
+      this.events.push(...events);
+      this.loadedIndex += events.length
+      this.loading = false;
+    });
+  }
+
+  stopPropagation() {
+    this.stopPropagation();
+  }
+
+  getEventTypeClass(eventType: string): string {
+    eventType = eventType.toLowerCase()
+    if (eventType == "event") return "color-accent-darkest"
+    if (eventType == "sponsored") return "color-purple"
+    if (eventType == "workshop") return "color-teal-darker"
+  }
+
+  eventSpansMultipleDays(event: Event): boolean {
+    return new Date(event.schedule.end).getDate() != new Date(event.schedule.start).getDate()
+  }
+
+  showEvent(event: Event): void {
+    this.showPopup = true;
+    this.popupEvent = event;
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.activatedRoute,
+        queryParams: { event: event._id }
+      });
+  }
+
+  hideEvent(): void {
+    this.showPopup = false;
+    this.popupEvent = null;
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.activatedRoute,
+        queryParams: {}
+      });
+    this.titleService.setTitle("Events @ Carleton eggX");
+  }
+
+  typeIsFiltered(type: string): boolean {
+    return this.form.type.indexOf(type) != -1;
+  }
+
+  toggleTypeFilter(type: string): void {
+    const index = this.form.type.indexOf(type)
+    if (index != -1) this.form.type.splice(index, 1)
+    else this.form.type.push(type)
+  }
+
   doSetup() {
     this.apiService.update<Event>('event', {title: 'Welcome to eggX'}, {
       type: 'event',
@@ -224,87 +304,6 @@ export class EventsComponent implements OnInit {
       location: { text: 'Virtual - Microsoft Teams' }
     }, {upsert: true}).subscribe()
     // this.doSearch();
-  }
-
-  doFetch(id: ObjectId): void {
-    if (this.loading) return;
-    this.loading = true;
-    this.showPopup = true;
-    this.apiService.fetch('event', id, {
-      projection: EventsComponent.queryProjection
-    }).subscribe(event => {
-      this.loading = false;
-      this.popupEvent = event;
-      this.showPopup = event != null;
-      if (event != null) {
-        this.titleService.setTitle(`${event.title} - Event @ Carleton eggX`)
-      }
-    })
-  }
-
-  doSearch(skip: number): void {
-    if (this.loading) return;
-    this.loading = true;
-    this.loadedIndex = skip
-    this.apiService.search('events', this.form, {
-      sort: {'schedule.start': 1},
-      skip,
-      limit: 10,
-      projection: EventsComponent.queryProjection
-    }).subscribe(events => {
-      this.events.push(...events);
-      this.loadedIndex += events.length
-      console.log(events.length)
-      this.loading = false;
-    });
-  }
-
-  stopPropagation() {
-    this.stopPropagation();
-  }
-
-  getEventTypeClass(eventType: string): string {
-    eventType = eventType.toLowerCase()
-    if (eventType == "event") return "color-accent-darkest"
-    if (eventType == "sponsored") return "color-purple"
-    if (eventType == "workshop") return "color-teal-darker"
-  }
-
-  eventSpansMultipleDays(event: Event): boolean {
-    return new Date(event.schedule.end).getDate() != new Date(event.schedule.start).getDate()
-  }
-
-  showEvent(event: Event): void {
-    this.showPopup = true;
-    this.popupEvent = event;
-    this.router.navigate(
-      [],
-      {
-        relativeTo: this.activatedRoute,
-        queryParams: { event: event._id }
-      });
-  }
-
-  hideEvent(): void {
-    this.showPopup = false;
-    this.popupEvent = null;
-    this.router.navigate(
-      [],
-      {
-        relativeTo: this.activatedRoute,
-        queryParams: {}
-      });
-    this.titleService.setTitle("Events @ Carleton eggX");
-  }
-
-  typeIsFiltered(type: string): boolean {
-    return this.form.type.indexOf(type) != -1;
-  }
-
-  toggleTypeFilter(type: string): void {
-    const index = this.form.type.indexOf(type)
-    if (index != -1) this.form.type.splice(index, 1)
-    else this.form.type.push(type)
   }
 
 }

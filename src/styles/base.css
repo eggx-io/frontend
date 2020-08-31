@@ -9,8 +9,31 @@
 
 /* ================== global selectors ===================== */
 
+html {
+  font-size: 16px;
+}
+
+@media only screen and (min-width: 760px) {
+  html {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (min-width: 1080px) {
+  html {
+    font-size: 20px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  html {
+    font-size: 22px;
+  }
+}
+
 * {
   font-family: "Open Sans", "Montserrat", sans-serif;
+  font-size: 1.2rem;
   scroll-behavior: smooth;
   box-sizing: border-box;
   color: var(--color-primary);
@@ -53,10 +76,10 @@ button,
 input[type="button"] {
   display: inline-flex;
   width: fit-content;
-  padding: 7px 10px;
+  padding: 0.4375rem 0.625rem;
   align-items: center;
   border: none;
-  border-radius: 3px;
+  border-radius: 0.1875rem;
   background-color: transparent;
   color: var(--color-primary);
   cursor: pointer !important;
@@ -72,15 +95,15 @@ input[type="button"].pressed {
 button i,
 .btn i,
 input[type="button"] i {
-  margin-right: 5px;
-  font-size: 20px !important;
+  margin-right: 0.3125rem;
+  font-size: 1.25rem !important;
   cursor: pointer !important;
 }
 
 code {
-  padding: 3px 5px;
+  padding: 0.1875rem 0.3125rem;
   background-color: var(--bg-secondary);
-  border-radius: 2px;
+  border-radius: 0.125rem;
 }
 
 h1,
@@ -91,27 +114,27 @@ h4 {
 }
 
 h1 {
-  margin-top: 10px;
-  margin-bottom: 5px;
-  font: 700 38px "Montserrat", "Gotham Bold", sans-serif !important;
+  margin-top: 0.625rem;
+  margin-bottom: 0.3125rem;
+  font: 700 2.375rem "Montserrat", "Gotham Bold", sans-serif !important;
 }
 
 h2 {
   margin-top: 0;
-  margin-bottom: 5px;
-  font: 500 24px "Montserrat", "Gotham Light Regular", sans-serif !important;
+  margin-bottom: 0.3125rem;
+  font: 500 1.5rem "Montserrat", "Gotham Light Regular", sans-serif !important;
 }
 
 h3 {
   min-width: 100%;
   margin-top: 0px !important;
-  margin-bottom: 5px !important;
-  font: 700 16px "Gotham Light Regular", "Montserrat", sans-serif !important;
+  margin-bottom: 0.3125rem !important;
+  font: 700 1rem "Gotham Light Regular", "Montserrat", sans-serif !important;
 }
 
 h4 {
   margin: 0;
-  font-size: 18px !important;
+  font-size: 1.125rem !important;
 }
 
 input {
@@ -121,8 +144,13 @@ input {
   color: var(--color-primary);
 }
 
+li {
+  line-height: 1.375rem;
+}
+
 p {
-  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.25rem;
 }
 
 p + h2 {
@@ -222,7 +250,7 @@ form .error {
   padding: 15px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 #choosePopup .choose-popup .list {
@@ -289,7 +317,7 @@ form .error {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   align-items: flex-end;
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 #infoPopup .info-popup .header h1,
@@ -307,7 +335,7 @@ form .error {
   width: 100%;
   margin-top: 20px;
   padding: 30px 20px 20px 15px;
-  font-size: 16px;
+  font-size: 1rem;
 }
 
 #infoPopup .dismiss {
@@ -335,21 +363,24 @@ form .error {
 }
 
 .page .page-title {
-  margin-top: 0;
-  padding: 30px 3vw 10px 3vw;
+  margin-top: 4.375rem;
+  padding: var(--page-title-padding);
   background-color: var(--bg-accent);
 }
 
 .page .content {
   display: flex;
   flex-grow: 1;
-  padding: 25px 2.5vw 25px 2.5vw;
+  padding: 25px var(--page-content-horz-padding) 25px var(--page-content-horz-padding);
   flex-direction: column;
+  background-color: var(--bg-primary);
 }
 
 /* ================= variables ======================= */
 
 :root {
+  --page-title-padding: 30px 3vw 10px 3vw;
+  --page-content-horz-padding: 2.5vw;
   --bg-accent: var(--color-accent) !important;
   --bg-accent-light: #7de7e8;
   --bg-primary: #ffffff !important;
@@ -469,7 +500,7 @@ form .error {
 /* ================= component styling ==================== */
 
 .btn-primary {
-  padding: 7px 10px;
+  padding: 0.4375rem 0.625rem;
   border: 1px solid var(--color-black);
   color: var(--color-primary);
 }
@@ -486,7 +517,7 @@ form .error {
 }
 
 .btn-accent {
-  padding: 6px 10px;
+  padding: 0.375rem 0.625rem;
   border: 1px solid var(--color-accent);
   background-color: var(--color-accent);
   color: var(--color-black);
@@ -497,12 +528,8 @@ form .error {
   color: var(--color-black);
 }
 
-.btn-accent:hover > i {
-  color: var(--color-black);
-}
-
 .btn-inverse {
-  padding: 7px 10px;
+  padding: 0.4375rem 0.625rem;
   background-color: var(--color-teal);
   border: 1px solid var(--color-teal);
   color: var(--color-inverse);
@@ -516,14 +543,14 @@ form .error {
 
 .divider {
   width: calc(100% - 20px);
-  height: 1px;
-  margin: 10px;
+  height: 0.0625rem;
+  margin: 0.625rem;
   background-color: var(--bg-muted);
 }
 
 .vertical-divider {
-  width: 1px;
-  margin: 0 5px;
+  width: 0.0625rem;
+  margin: 0 0.3125rem;
   background-color: var(--bg-muted);
 }
 
@@ -583,7 +610,7 @@ form .error {
   visibility: hidden;
 }
 
-.paralax {
+.parallax {
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -610,7 +637,7 @@ form .error {
   display: flex;
   padding: 10px;
   align-items: center;
-  font-size: 14px;
+  font-size: 0.875rem;
   cursor: pointer;
 }
 
@@ -621,7 +648,7 @@ form .error {
 .context-menu-item i {
   margin-left: 5px;
   margin-right: 10px;
-  font-size: 22px;
+  font-size: 1.375rem;
 }
 
 /* =============================================== */
@@ -712,7 +739,7 @@ form .error {
 }
 
 .status-box.empty {
-  font-size: 14px;
+  font-size: 0.875rem;
   color: #b2b2b2;
 }
 
@@ -734,7 +761,7 @@ form .error {
 
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 20px;
 }
 
 /* Track */
@@ -750,12 +777,4 @@ form .error {
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #b2b2b2;
-}
-
-:not(input):not(textarea),
-:not(input):not(textarea)::after,
-:not(input):not(textarea)::before {
-  -webkit-user-select: none;
-  user-select: none;
-  cursor: default;
 }

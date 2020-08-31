@@ -2,7 +2,7 @@
 
 .page-title {
   display: flex;
-  flex-grow: 2;
+  flex-grow: 1;
   margin-bottom: 0;
   padding-bottom: 30px;
   justify-content: center;
@@ -20,7 +20,11 @@
 
 .content {
   display: flex;
-  justify-content: center;
   align-items: center;
   box-shadow: var(--drop-shadow-top-light);
+}
+
+.content h2 {
+  margin-top: 1.875rem;
+  margin-bottom: 2rem;
 }

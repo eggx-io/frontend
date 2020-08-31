@@ -37,9 +37,9 @@ export class ProjectsComponent implements OnInit {
         domain: 1,
         featuredImage: 1
       },
-      populate: {
+      populate: [{
         path: 'team', select: 'members'
-      }
+      }]
     }).subscribe(projects => {
       this.projects.push(...projects);
       this.loading = false;

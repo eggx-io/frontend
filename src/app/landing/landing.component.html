@@ -1,22 +1,15 @@
-<app-navbar></app-navbar>
-
-<div class="page-title post post-flip" *ngIf="spotlightPost">
-  <h1 class="sm-title">{{spotlightPost.title}}</h1>
+<div class="page-title">
   <div class="text">
-    <h1 class="md-title">{{spotlightPost.title}}</h1>
-    <p class="blurb">{{spotlightPost.blurb}}</p>
-    <a href="/post/{{spotlightPost._id}}">
-      <button class="btn-primary">
-        {{spotlightPost.callToAction ? spotlightPost.callToAction : 'Learn more'}}
-      </button>
-    </a>
-  </div>
-  <div class="img">
-    <img src="{{spotlightPost.featuredImage}}" />
+    <h1>Carleton eggX</h1>
+    <p>
+      Many of us want to create something that benefits ourselves and the people around us but not many of us know how.
+      We aim to make coding more approachable to all kinds of students so that everyone can come together to share their
+      love for digital technology.
+    </p>
   </div>
 </div>
 <div class="content" infiniteScroll (scrolled)="onScroll()">
-  <div class="post" *ngFor="let post of posts; index as i" [ngClass]="{'post-flip': i % 2 == 1}">
+  <div class="post" *ngFor="let post of posts">
     <h1 class="sm-title">{{post.title}}</h1>
     <div class="text">
       <h1 class="md-title">{{post.title}}</h1>
@@ -26,12 +19,10 @@
       </a>
     </div>
     <div class="img">
-      <img src="{{post.featuredImage}}" />
+      <img src="{{post.featuredImage}}" alt="Post Featured Image" />
     </div>
   </div>
   <div class="loading" *ngIf="loading">
     <mat-spinner></mat-spinner>
   </div>
 </div>
-
-<app-footer></app-footer>

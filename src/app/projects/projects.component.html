@@ -1,5 +1,3 @@
-<app-navbar></app-navbar>
-
 <h1 class="page-title">Projects</h1>
 <div class="content">
   <h2 class="color-orange">Note: You may not view project details from this site at the moment</h2>
@@ -10,7 +8,7 @@
     <a href="/project/{{project._id}}" *ngFor="let project of projects">
       <div class="project drop-shadow-light">
         <div class="img bg-secondary">
-          <img src="{{project.featuredImage}}" *ngIf="project.featuredImage" />
+          <img src="{{project.featuredImage}}" alt="Project Featured Image" *ngIf="project.featuredImage" />
           <i class="material-icons" *ngIf="!project.featuredImage">code</i>
         </div>
         <h2>{{project.name}}</h2>
@@ -27,4 +25,3 @@
   </div>
 </div>
 
-<app-footer></app-footer>
