@@ -8,12 +8,15 @@ import { Component, OnInit, Output } from '@angular/core';
 export class NavbarComponent implements OnInit {
   @Output() showDropShadow: boolean = false
   @Output() menuOpen: boolean = false
-  @Output() menuItems = [
+  @Output() readonly menuItems = [
     { name: 'About', href: '/about' },
     { name: 'People', href: '/people' },
     { name: 'Events', href: '/events' },
     // {name: 'Projects', href: '/projects'},
-    { name: 'Resources', href: '/resources' },
+    { name: 'Resources', href: '/resources' }
+  ]
+  @Output() readonly smallMenuItems = [
+    ...this.menuItems,
     { name: '+ Join the club', href: 'https://carletoncse.typeform.com/to/fSG5ssi6'}
   ]
 

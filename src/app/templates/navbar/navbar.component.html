@@ -24,7 +24,7 @@
       </div>
     </div>
     <div class="items">
-      <div class="item" *ngFor="let item of menuItems; last as isLast">
+      <div class="item" *ngFor="let item of smallMenuItems; last as isLast">
         <a href="{{item.href}}" class="btn">{{item.name}}</a>
         <div class="divider" *ngIf="!isLast"></div>
       </div>
