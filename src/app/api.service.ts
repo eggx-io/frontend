@@ -80,7 +80,7 @@ export class ApiService {
       `${environment.api_host}/open/search/${path}`, { q, options: queryOptions }
     ).pipe(
       catchError(this.handleError<T[]>(`search ${path}`)),
-      map((v: T[]) => (environment.production || !environment.beta) && path != 'posts' ? v : this.demoValues[path])
+      map((v: T[]) => (environment.production || !environment.beta) ? v : this.demoValues[path])
     );
   }
 

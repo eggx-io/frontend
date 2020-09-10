@@ -57,7 +57,8 @@
               "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.js",
               "node_modules/emoji-toolkit/lib/js/joypixels.min.js",
               "node_modules/katex/dist/katex.min.js"
-            ]
+            ],
+            "crossOrigin": "anonymous"
           },
           "configurations": {
             "production": {

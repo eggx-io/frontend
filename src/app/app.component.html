@@ -1,4 +1,30 @@
-<div class="page">
+<div class="bad-browser" *ngIf="browserInfo.unsupported && !browserInfo.warningDismissed">
+  <div class="content">
+    <h2>Please update your browser</h2>
+    <p>We're working on configuring our CSS to support Safari and IE rendering engines</p>
+    <p>Please use a different browser in the mean-time like the ones listed below:</p>
+    <button class="btn btn-inverse" (click)="dismissBrowserWarning()">I understand, let me in</button>
+    <div class="list">
+      <div class="browser">
+        <img src="/assets/logos/firefox_mark_128px.png" alt="Firefox Browser Logo Mark" />
+        Firefox
+      </div>
+      <div class="browser">
+        <img src="/assets/logos/google_chrome_mark_128px.png" alt="Google Chrome Browser Logo Mark" />
+        Google Chrome
+      </div>
+      <div class="browser">
+        <img src="/assets/logos/microsoft_edge_mark_128px.png" alt="Microsoft Edge Browser Logo Mark" />
+        Microsoft Edge
+      </div>
+      <div class="browser">
+        <img src="/assets/logos/opera_mark_128px.png" alt="Opera Browser Logo Mark" />
+        Opera
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page" *ngIf="!browserInfo.unsupported || browserInfo.warningDismissed">
   <router-outlet></router-outlet>
   <app-footer></app-footer>
   <app-navbar></app-navbar>

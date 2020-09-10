@@ -33,7 +33,7 @@ html {
 
 * {
   font-family: "Open Sans", "Montserrat", sans-serif;
-  font-size: 1.2rem;
+  font-size: 1rem;
   scroll-behavior: smooth;
   box-sizing: border-box;
   color: var(--color-primary);
@@ -298,8 +298,6 @@ form .error {
   align-items: center;
   justify-content: space-between;
   border: 0.5px solid #0d47a1;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
   background-color: var(--bg-primary);
   box-shadow: var(--drop-shadow-strong);
   overflow-y: auto;
@@ -316,7 +314,6 @@ form .error {
   flex-direction: column-reverse;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  align-items: flex-end;
   font-size: 1.125rem;
 }
 
@@ -755,6 +752,36 @@ form .error {
 
 .status-box.empty .left-justify img {
   margin-right: 15px;
+}
+
+/* =============================================== */
+
+.bad-browser {
+  display: flex;
+  flex-grow: 1;
+  padding: 20px;
+  justify-content: center;
+}
+
+.bad-browser .content {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.bad-browser .content img {
+  width: 64px;
+}
+
+.bad-browser .content .list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.bad-browser .content .list .browser {
+  margin: 10px;
+  text-align: center;
 }
 
 /* ================ secrollbar selectors ======================== */

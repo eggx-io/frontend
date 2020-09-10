@@ -13,7 +13,8 @@ export class NavbarComponent implements OnInit {
     { name: 'People', href: '/people' },
     { name: 'Events', href: '/events' },
     // {name: 'Projects', href: '/projects'},
-    { name: 'Resources', href: '/resources' }
+    { name: 'Resources', href: '/resources' },
+    { name: '+ Join the club', href: 'https://carletoncse.typeform.com/to/fSG5ssi6'}
   ]
 
   constructor() { }

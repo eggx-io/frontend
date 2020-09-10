@@ -6,11 +6,10 @@
       <p class="blurb">{{event.blurb}}</p>
       <div class="schedule">
         <i class="material-icons color-teal">event</i>
-        <span>{{event.schedule.start | date:'MMM d, y, h:mm a'}}</span>
-        <span *ngIf="eventSpansMultipleDays(event)">
-          &mdash;
-          <span>{{event.schedule.end | date:'MMM d, y, h:mm a'}}</span>
-        </span>
+        <span *ngIf="!eventSpansMultipleDays(event); else scheduleElseBlock">
+          {{event.schedule.start | date:'EEEE, d MMM y, h:mm a'}}&mdash;{{event.schedule.end | date:'h:mm a'}}</span>
+        <ng-template #scheduleElseBlock>
+          {{event.schedule.start | date:'EEEE, d MMM y, h:mm a'}}&mdash;{{event.schedule.end | date:'EEEE, d MMM y, h:mm a'}}</ng-template>
       </div>
       <div class="bottom">
         <button class="btn-primary" (click)="showEvent(event)">
@@ -60,11 +59,10 @@
           <h1>{{popupEvent.title}}</h1>
           <div class="schedule">
             <i class="material-icons color-teal">event</i>
-            <span>{{popupEvent.schedule.start | date:'MMM d, y, h:mm a'}}</span>
-            <span *ngIf="eventSpansMultipleDays(popupEvent)">
-              &mdash;
-              <span>{{popupEvent.schedule.end | date:'MMM d, y, h:mm a'}}</span>
-            </span>
+            <span *ngIf="!eventSpansMultipleDays(popupEvent); else popupScheduleElseBlock">
+              {{popupEvent.schedule.start | date:'EEEE, d MMM y, h:mm a'}}&mdash;{{popupEvent.schedule.end | date:'h:mm a'}}</span>
+            <ng-template #popupScheduleElseBlock>
+              {{popupEvent.schedule.start | date:'EEEE, d MMM y, h:mm a'}}&mdash;{{popupEvent.schedule.end | date:'EEEE, d MMM y, h:mm a'}}</ng-template>
           </div>
         </div>
         <button class="close btn-primary" (click)="hideEvent()">
