@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
   ]
   @Output() readonly smallMenuItems = [
     ...this.menuItems,
-    { name: '+ Join the club', href: 'https://carletoncse.typeform.com/to/fSG5ssi6'}
+    { name: '+ Join the club', href: 'https://forms.gle/j3uxyxA5E7go43xbA'}
   ]
 
   constructor() { }
