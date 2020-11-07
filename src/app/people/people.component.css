@@ -15,6 +15,7 @@
 
 .groups .group {
   display: inline-flex;
+  font-weight: bold;
 }
 
 .groups .group span {

@@ -81,7 +81,7 @@ export class PeopleComponent implements OnInit {
     }
     const mutatedPush = (array: Group['people'][0][], item: Group['people'][0]) => {
       array.push(item)
-      if (execs.length == 6 && mentors.length == 2) onPeopleUpdated()
+      if (execs.length == 5 && mentors.length == 4) onPeopleUpdated()
     }
     this.apiService.findOneAndUpdate<Person>('person', { email: 'victorolaitan@cmail.carleton.ca' }, {
       email: 'victorolaitan@cmail.carleton.ca', email_verified: true,
@@ -94,35 +94,15 @@ export class PeopleComponent implements OnInit {
         joinedDate: new Date(2019, 8, 1).getTime()
       }
     }, { upsert: true }).subscribe(person => mutatedPush(execs, {
-      title: 'Co-President',
+      title: 'President',
       person: person._id,
       tagline: "\
-This is Victor, he's one of our co-presidents. Victor is in his fourth year studying \
-computer science in the software engineering stream. Victor loves spending his free time \
-writing code and contemplating what the future will look like (he's a real nerd!) But \
-he also loves to engage with people of different backgrounds and have lengthy discussions \
-on anything under the sun. Victor is experienced in cloud software development and is \
-currently working as a DevOps co-op!"
-    }))
-    this.apiService.findOneAndUpdate<Person>('person', { email: 'sebastiangadzinski@cmail.carleton.ca' }, {
-      email: 'sebastiangadzinski@cmail.carleton.ca', email_verified: true,
-      avatar: 'https://eggx.io/assets/execs/sgadzinski.svg',
-      profile: {
-        firstName: 'Sebastian',
-        lastName: 'Gadzinski'
-      },
-      log: {
-        joinedDate: new Date(2019, 8, 1).getTime()
-      }
-    }, { upsert: true }).subscribe(person => mutatedPush(execs, {
-      title: 'Co-President',
-      person: person._id,
-      tagline: "\
-Sebastian is working in the forest right now and so couldn't submit an intro \
-but here's one for him. Sebastian is one of our co-presidents. He's in his fourth year \
-of computer science in the software engineering stream with a minor in mathematics. In \
-his free time he likes to workout and write Android apps! I'll leave the intro there for \
-now and let him introduce himself later."
+Victor is in his fourth year studying computer science in the software engineering \
+stream. Victor loves spending his free time writing code and contemplating what \
+the future will look like (he's a real nerd!) But he also loves to engage with \
+people of different backgrounds and have lengthy discussions on anything under the \
+sun. Victor is experienced in cloud software development and is currently working \
+as a DevOps co-op!"
     }))
     this.apiService.findOneAndUpdate<Person>('person', { email: 'kartikeyeegurav@cmail.carleton.ca' }, {
       email: 'kartikeyeegurav@cmail.carleton.ca', email_verified: true,
@@ -247,6 +227,45 @@ the outdoors, and cooking. She's also passionate about the interplay of biology 
 and technology. As well, she loves learning about the new advances in mobility \
 aids and assistive technology. Harleen is experienced & currently working in the \
 field of front-end and program architecture."
+    }))
+    this.apiService.findOneAndUpdate<Person>('person', { email: 'benwallace@cmail.carleton.ca' }, {
+      email: 'benwallace@cmail.carleton.ca', email_verified: true,
+      avatar: 'https://eggx.io/assets/execs/bwallace.jpg',
+      profile: {
+        firstName: 'Ben',
+        lastName: 'Wallace'
+      },
+      log: {
+        joinedDate: new Date(2020, 8, 15).getTime()
+      }
+    }, { upsert: true }).subscribe(person => mutatedPush(mentors, {
+      title: 'Mentor - DevOps',
+      person: person._id,
+      tagline: "\
+Ben is in Computer Science Software Engineering Stream and is in his 3rd year. \
+In Ben’s spare time, he enjoys playing hockey, skiing, and working out. Ben \
+has worked in DevOps and Web Development, and will be working as a Back End \
+Developer in the summer."
+    }))
+    this.apiService.findOneAndUpdate<Person>('person', { email: 'victoryang@cmail.carleton.ca' }, {
+      email: 'victoryang@cmail.carleton.ca', email_verified: true,
+      avatar: 'https://eggx.io/assets/execs/vyang.jpg',
+      profile: {
+        firstName: 'Victor',
+        lastName: 'Yang'
+      },
+      log: {
+        joinedDate: new Date(2020, 8, 16).getTime()
+      }
+    }, { upsert: true }).subscribe(person => mutatedPush(mentors, {
+      title: 'Mentor - Mobile Apps',
+      person: person._id,
+      tagline: "\
+Victor is in his 3rd year of a Bachelor's of Computer Science in the Mobile \
+Applications stream. Victor enjoys problem solving and learning new languages \
+and technologies. Victor's interests range from travelling to being active, \
+or just coding for fun. He also likes video games, likes to meet new people \
+and is looking forward to helping out as a mentor."
     }))
   }
 }
