@@ -1,41 +1,52 @@
 <h1 class="page-title">Resources</h1>
-<div class="content">
-  <a class="resource" href="https://github.com/eggx-io/manual">
-    <div class="img">
-      <i class="material-icons">book</i>
-    </div>
-    <div class="text">
-      <h3>eggX Manual</h3>
-      <p>
-        Wiki for everything you<br />
-        need to know about our club
-      </p>
-    </div>
-  </a>
-  <a class="resource" href="https://github.com/eggx-io">
-    <div class="img">
-      <img src="assets/logos/github_mark.svg" alt="GitHub logo mark" />
-    </div>
-    <div class="text">
-      <h3>Github Organisation</h3>
-      <p>
-        Workshop repositories<br />
-        Teams<br />
-        Issue reporting<br />
-      </p>
-    </div>
-  </a>
-  <a class="resource" href="https://github.com/eggx-io/frontend">
-    <div class="img">
-      <img src="assets/eggx-logo-square.svg" alt="eggX square logo" />
-    </div>
-    <div class="text">
-      <h3>Frontend Repository</h3>
-      <p>
-        (This website)<br />
-        Built with Angular<br />
-      </p>
-    </div>
-  </a>
+<div class="content" infiniteScroll (scrolled)="onScroll()">
+  <div class="resources">
+    <a class="resource" href="https://github.com/eggx-io/manual">
+      <div class="img">
+        <i class="material-icons">book</i>
+      </div>
+      <div class="text">
+        <h3>eggX Manual</h3>
+        <p>
+          Wiki for everything you<br />
+          need to know about our club
+        </p>
+      </div>
+    </a>
+    <a class="resource" href="https://github.com/eggx-io">
+      <div class="img">
+        <img src="assets/logos/github_mark.svg" alt="GitHub logo mark" />
+      </div>
+      <div class="text">
+        <h3>Github Organisation</h3>
+        <p>
+          Workshop repositories<br />
+          Teams<br />
+          Issue reporting<br />
+        </p>
+      </div>
+    </a>
+    <a class="resource" href="https://github.com/eggx-io/frontend">
+      <div class="img">
+        <img src="assets/eggx-logo-square.svg" alt="eggX square logo" />
+      </div>
+      <div class="text">
+        <h3>Frontend Repository</h3>
+        <p>
+          (This website)<br />
+          Built with Angular<br />
+        </p>
+      </div>
+    </a>
+  </div>
+  <h2>Event Resources</h2>
+  <div class="eventResource bg-secondary" *ngFor="let event of events; first as isFirst">
+    <h3>{{event.title}}</h3>
+    <ul>
+      <li *ngFor="let resource of event.resources">
+        <a [href]="resource.url" target="_blank">{{resource.name}}</a>
+      </li>
+    </ul>
+    <div class="divider" *ngIf="!isFirst"></div>
+  </div>
 </div>
-

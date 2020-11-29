@@ -36,5 +36,9 @@ export class Event extends Schema {
     invitees?: ObjectId[] | Person[]
   }
   tags?: string[] = []
+  resources?: {
+    name: string
+    url: string
+  }[]
   log?: defaultLog
 }

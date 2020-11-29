@@ -1,7 +1,7 @@
 @import url("../../styles/host.css");
 
-.content {
-  flex-direction: row;
+.resources {
+  display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
@@ -40,4 +40,14 @@
 .resource .img img {
   width: 100%;
   height: 100%;
+}
+
+.eventResource {
+  width: 95%;
+  max-width: 1000px;
+  padding: 0.75rem;
+}
+
+.eventResource ul {
+  margin-bottom: 0;
 }
