@@ -23,6 +23,7 @@ export class PeopleComponent implements OnInit {
   ngOnInit(): void {
     this.titleService.setTitle("People @ Carleton eggX");
     this.doSearch();
+    // well aware that this is a terrible practice
     // this.doSetup()
   }
 
@@ -42,7 +43,11 @@ export class PeopleComponent implements OnInit {
       this.groups.splice(0, this.groups.length, ...groups);
       if (this.groups) {
         const selectedGroup = this.groups.find(g => g.name.toLowerCase() == this.selectedGroup) || this.groups[0];
-        selectedGroup.people = selectedGroup.people.sort((p1, p2) => p1.title.localeCompare(p2.title))
+        selectedGroup.people = selectedGroup.people.sort((p1, p2) => {
+          const p1Name = `${(<Person>p1.person).profile.firstName} ${(<Person>p1.person).profile.lastName}`
+          const p2Name = `${(<Person>p2.person).profile.firstName} ${(<Person>p2.person).profile.lastName}`
+          return p1Name.localeCompare(p2Name)
+        })
         this.people.splice(
           0,
           this.people.length,
@@ -66,6 +71,10 @@ export class PeopleComponent implements OnInit {
     this.titleService.setTitle(`${selectedGroup.name} @ Carleton eggX`);
   }
 
+  /**
+   * I am well aware of how bad all of this is but it don't really matter atm because the db cannot be modified in prod.
+   * Although, yes this is still a bad idea in case something changes down the line
+   */
   doSetup() {
     let execs: Group['people'][0][] = []
     let mentors: Group['people'][0][] = []
@@ -81,7 +90,7 @@ export class PeopleComponent implements OnInit {
     }
     const mutatedPush = (array: Group['people'][0][], item: Group['people'][0]) => {
       array.push(item)
-      if (execs.length == 5 && mentors.length == 4) onPeopleUpdated()
+      if (execs.length == 7 && mentors.length == 3) onPeopleUpdated()
     }
     this.apiService.findOneAndUpdate<Person>('person', { email: 'victorolaitan@cmail.carleton.ca' }, {
       email: 'victorolaitan@cmail.carleton.ca', email_verified: true,
@@ -115,7 +124,7 @@ as a DevOps co-op!"
         joinedDate: new Date(2020, 6, 21).getTime()
       }
     }, { upsert: true }).subscribe(person => mutatedPush(execs, {
-      title: 'Engagement Officer',
+      title: 'Engagement Lead',
       person: person._id,
       tagline: "\
 Kartikeyee (KT) is studying Computer Science and is in his fourth year. \
@@ -136,7 +145,7 @@ pizza) 😃"
         joinedDate: new Date(2020, 6, 21).getTime()
       }
     }, { upsert: true }).subscribe(person => mutatedPush(execs, {
-      title: 'Finance Officer',
+      title: 'Finance Lead',
       person: person._id,
       tagline: "\
 This is Sakina, she's our finance officer. Sakina is in her third year of \
@@ -155,7 +164,7 @@ communicatation and problem solving."
         joinedDate: new Date(2020, 6, 21).getTime()
       }
     }, { upsert: true }).subscribe(person => mutatedPush(execs, {
-      title: 'Marketing Officer',
+      title: 'Marketing Lead',
       person: person._id,
       tagline: "\
       This is Shubham Sharan, he's our marketing officer. Shubham is currently \
@@ -176,7 +185,7 @@ communicatation and problem solving."
         joinedDate: new Date(2020, 6, 21).getTime()
       }
     }, { upsert: true }).subscribe(person => mutatedPush(execs, {
-      title: 'Projects Officer',
+      title: 'Outreach Lead',
       person: person._id,
       tagline: "\
 Tanner is studying international business and is in his 4th year. Tanner \
@@ -185,6 +194,26 @@ about various culinary cultures. Tanner is interested in progressive and \
 ethical change in business. He is experiened in international management & \
 finance and recently worked on several research papers/projects notably on \
 banking innovation as well as data & AI in business."
+    }))
+    this.apiService.findOneAndUpdate<Person>('person', { email: 'victoryang@cmail.carleton.ca' }, {
+      email: 'victoryang@cmail.carleton.ca', email_verified: true,
+      avatar: 'https://eggx.io/assets/execs/vyang.jpg',
+      profile: {
+        firstName: 'Victor',
+        lastName: 'Yang'
+      },
+      log: {
+        joinedDate: new Date(2020, 8, 16).getTime()
+      }
+    }, { upsert: true }).subscribe(person => mutatedPush(execs, {
+      title: 'Projects Lead',
+      person: person._id,
+      tagline: "\
+Victor is in his 3rd year of a Bachelor's of Computer Science in the Mobile \
+Applications stream. Victor enjoys problem solving and learning new languages \
+and technologies. Victor's interests range from travelling to being active, \
+or just coding for fun. He also likes video games, likes to meet new people \
+and is looking forward to helping out as a mentor."
     }))
     this.apiService.findOneAndUpdate<Person>('person', { email: 'ryanshimoga@cmail.carleton.ca' }, {
       email: 'ryanshimoga@cmail.carleton.ca', email_verified: true,
@@ -196,14 +225,14 @@ banking innovation as well as data & AI in business."
       log: {
         joinedDate: new Date(2020, 6, 21).getTime()
       }
-    }, { upsert: true }).subscribe(person => mutatedPush(mentors, {
-      title: 'Lead Mentor',
+    }, { upsert: true }).subscribe(person => mutatedPush(execs, {
+      title: 'Outreach Support',
       person: person._id,
       tagline: "\
-This is Ryan Shimoga, he is one of our mentors and is in his 4th year of \
-Computer Science. Ryan currently works for the Burlington Chamber of \
-Commerce and has 10+ years of experience in the field of customer service & \
-sales. He is an advocate for youth empowerment and is often described as very \
+This is Ryan Shimoga, he is in his 4th year of Computer Science. Ryan \
+currently works for the Burlington Chamber of Commerce and has 10+ \
+years of experience in the field of customer service & sales. He is an \
+advocate for youth empowerment and is often described as very \
 approachable and hard-working. Ryan also enjoys soccer, and has played \
 competitively for 14 years."
     }))
@@ -247,25 +276,25 @@ In Ben’s spare time, he enjoys playing hockey, skiing, and working out. Ben \
 has worked in DevOps and Web Development, and will be working as a Back End \
 Developer in the summer."
     }))
-    this.apiService.findOneAndUpdate<Person>('person', { email: 'victoryang@cmail.carleton.ca' }, {
-      email: 'victoryang@cmail.carleton.ca', email_verified: true,
-      avatar: 'https://eggx.io/assets/execs/vyang.jpg',
+    this.apiService.findOneAndUpdate<Person>('person', { email: 'anoushkasinghal@cmail.carleton.ca' }, {
+      email: 'anoushkasinghal@cmail.carleton.ca', email_verified: true,
+      avatar: 'https://eggx.io/assets/execs/asinghal.jpg',
       profile: {
-        firstName: 'Victor',
-        lastName: 'Yang'
+        firstName: 'Anoushka',
+        lastName: 'Singhal'
       },
       log: {
-        joinedDate: new Date(2020, 8, 16).getTime()
+        joinedDate: new Date(2020, 9, 27).getTime()
       }
     }, { upsert: true }).subscribe(person => mutatedPush(mentors, {
-      title: 'Mentor - Mobile Apps',
+      title: 'Mentor',
       person: person._id,
       tagline: "\
-Victor is in his 3rd year of a Bachelor's of Computer Science in the Mobile \
-Applications stream. Victor enjoys problem solving and learning new languages \
-and technologies. Victor's interests range from travelling to being active, \
-or just coding for fun. He also likes video games, likes to meet new people \
-and is looking forward to helping out as a mentor."
+Hi everyone! My name is Anoushka and I am in my third year of Computer Science \
+at Carleton! I love to draw and I am part of many different clubs at Carleton! \
+I am a mentor at Carleton eggX, VP web developer at CUWiSE, mental health \
+coordinator at Technolgap and community member at cuHacking! Feel free to \
+reach out to me on discord or IG @anoushka.21"
     }))
   }
 }
