@@ -23,6 +23,7 @@
     "@angular/router": "^11.0.9",
     "ngx-cookie-service": "^10.1.1",
     "ngx-infinite-scroll": "^9.1.0",
+    "ngx-markdown": "^11.0.1",
     "rxjs": "~6.6.3",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
