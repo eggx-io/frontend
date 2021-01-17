@@ -41,15 +41,7 @@ jobs:
       - name: Build app for dev 🛠💻
         run: npx ng build
       - name: Deploy test app to GAE ✈
-        # You may pin to the exact commit or the version.
-        # uses: zxyle/publish-gae-action@647a5e5538829de31fdfaad8de523573c417139f
-        uses: zxyle/publish-gae-action@v2.3.0
+        uses: google-github-actions/deploy-appengine@v0.2.0
         with:
-          # The service account email which will be used for authentication.
-          service_account_email: ${{ secrets.GCP_SA_EMAIL }}
-          # The service account key which will be used for authentication.
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-          # GAE project id
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          # Path to the app.yml, Defaults to ./app.yml
-          gae_config_path: './app-test.yml'
+          deliverables: './app-test.yml'
+          credentials: ${{ secrets.GCP_SA_KEY }}
