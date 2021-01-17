@@ -13,30 +13,53 @@ on:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  audit-packages:
+  install-packages:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    # we want to be notified of vulnerabilities but don't want them to block development
-    continue-on-error: true
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - name: Install NPM packages
+      - name: Install NPM packages 📦
         run: npm clean-install
+  audit-packages:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    needs: [install-packages]
+    # we want to be notified of vulnerabilities but don't want them to block development
+    continue-on-error: true
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
       # Runs a single command using the runners shell
-      - name: Audit NPM packages
+      - name: Audit NPM packages ✔🕵️‍♀️
         # only fails the audit if the results include a vulnerability with a level of moderate or higher
         run: npm audit --audit-level=moderate
   build-app:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
+    needs: [install-packages]
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      - name: Install NPM packages
-        run: npm clean-install
       # Runs a single command using the runners shell
-      - name: Build app
-        run: npx ng build --prod
+      - name: Build app for dev 🛠💻
+        run: npx ng build
+  deploy-app:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    environment: deploy-test
+    needs: [build-app]
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - name: Deploy test app to GAE ✈
+        # You may pin to the exact commit or the version.
+        # uses: zxyle/publish-gae-action@647a5e5538829de31fdfaad8de523573c417139f
+        uses: zxyle/publish-gae-action@v2.3.0
+        with:
+          # The service account email which will be used for authentication.
+          service_account_email: ${{ secrets.GCP_SA_EMAIL }}
+          # The service account key which will be used for authentication.
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          # GAE project id
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          # Path to the app.yml, Defaults to ./app.yml
+          gae_config_path: './app-test.yml'
