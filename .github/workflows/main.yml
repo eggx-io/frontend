@@ -46,10 +46,11 @@ jobs:
           cp -r app-test.yml dist/eggx-external/ bin/deployment/
           cd bin/deployment
           mv eggx-external/ www/
+          echo "Build ready for deployment at $(pwd)"
       - name: Set up Google Cloud SDK
         uses: google-github-actions/setup-gcloud@master
         with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}\
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
       - name: Deploy test app to GAE ✈
         run: |
