@@ -26,7 +26,7 @@ jobs:
         run: |
           npx ng build --prod
           mkdir -p bin/deployment
-          cp -r app.yml dist/eggx-external/ bin/deployment/
+          cp -r app.yaml dist/eggx-external/ bin/deployment/
           cd bin/deployment
           mv eggx-external/ www/
           echo "Build ready for deployment at $(pwd)"
@@ -38,4 +38,4 @@ jobs:
       - name: Deploy test app to GAE 🚀
         run: |
           cd bin/deployment
-          gcloud app deploy app.yml
+          gcloud app deploy app.yaml
