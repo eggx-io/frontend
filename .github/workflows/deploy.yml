@@ -22,9 +22,9 @@ jobs:
       - name: Install NPM packages 📦
         run: npm clean-install
       # Runs a single command using the runners shell
-      - name: Build app for dev 🛠💻
+      - name: Build app for prod 🛠💻
         run: |
-          npx ng build
+          npx ng build --prod
           mkdir -p bin/deployment
           cp -r app.yml dist/eggx-external/ bin/deployment/
           cd bin/deployment
