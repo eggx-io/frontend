@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     # we want to be notified of vulnerabilities but don't want them to block development
     continue-on-error: true
+    environment: CI
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -27,7 +28,7 @@ jobs:
       # Runs a single command using the runners shell
       - name: Audit NPM packages ✔🕵️‍♀️
         # only fails the audit if the results include a vulnerability with a level of moderate or higher
-        run: npm audit --audit-level=moderate
+        run: npm audit --audit-level=moderate &> ${{secrets.SENSITIVE_LOG_CAPTURE_FILE}}
   build-test:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -54,8 +55,8 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       - name: Deploy test app to GAE ✈
-        uses: google-github-actions/deploy-appengine@v0.2.0
+        uses: google-github-actions/deploy-appengine@v0.3.0
         with:
             credentials: ${{ secrets.GCP_SA_KEY }}
             working_directory: bin/deployment
-            deliverables: 'bin/deployments/app-test.yml'
+            deliverables: 'bin/deployment/app-test.yml'
