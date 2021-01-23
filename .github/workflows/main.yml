@@ -48,12 +48,22 @@ jobs:
           cd bin/deployment
           mv eggx-external/ www/
           echo "Build ready for deployment at $(pwd)"
+      - name: Upload deployment artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: deployment-artifacts
+          path: bin/deployment
   deploy-test:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     environment: deploy-test
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - uses: actions/checkout@v2 # required for GITHUB_WORKSPACE env var
+      - name: Download deployment artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: deployment-artifacts
       - name: Deploy test app to GAE ✈
         uses: google-github-actions/deploy-appengine@v0.3.0
         with:
