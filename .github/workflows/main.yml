@@ -28,7 +28,7 @@ jobs:
       - name: Audit NPM packages ✔🕵️‍♀️
         # only fails the audit if the results include a vulnerability with a level of moderate or higher
         run: npm audit --audit-level=moderate
-  build-and-deploy:
+  build-test:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     environment: deploy-test
@@ -47,12 +47,15 @@ jobs:
           cd bin/deployment
           mv eggx-external/ www/
           echo "Build ready for deployment at $(pwd)"
-      - name: Set up Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@master
-        with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
+  deploy-test:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    environment: deploy-test
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
       - name: Deploy test app to GAE ✈
-        run: |
-          cd bin/deployment
-          gcloud app deploy app-test.yml
+        uses: google-github-actions/deploy-appengine@v0.2.0
+        with:
+            credentials: ${{ secrets.GCP_SA_KEY }}
+            working_directory: bin/deployment
+            deliverables: 'bin/deployments/app-test.yml'
