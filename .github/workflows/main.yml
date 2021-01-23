@@ -69,5 +69,5 @@ jobs:
         uses: google-github-actions/deploy-appengine@v0.3.0
         with:
             credentials: ${{ secrets.GCP_SA_KEY }}
-            working_directory: ${{ env.GITHUB_WORKSPACE }}/bin/deployment
+            working_directory: ./bin/deployment
             deliverables: 'app-test.yml'
