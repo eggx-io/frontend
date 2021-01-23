@@ -59,4 +59,4 @@ jobs:
         with:
             credentials: ${{ secrets.GCP_SA_KEY }}
             working_directory: bin/deployment
-            deliverables: 'bin/deployment/app-test.yml'
+            deliverables: 'app-test.yml'
