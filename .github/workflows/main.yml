@@ -32,7 +32,6 @@ jobs:
   build-test:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    environment: deploy-test
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -69,5 +68,5 @@ jobs:
         uses: google-github-actions/deploy-appengine@v0.3.0
         with:
             credentials: ${{ secrets.GCP_SA_KEY }}
-            working_directory: ./bin/deployment
+            working_directory: ${{ github.workspace }}/bin/deployment
             deliverables: 'app-test.yml'
