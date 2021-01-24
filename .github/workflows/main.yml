@@ -64,6 +64,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: deployment-artifacts
+          path: bin/deployment
       - name: test-tree
         run: |
           ls -R
@@ -71,5 +72,5 @@ jobs:
         uses: google-github-actions/deploy-appengine@v0.3.0
         with:
             credentials: ${{ secrets.GCP_SA_KEY }}
-            working_directory: ${{ github.workspace }}/deployment-artifacts
+            working_directory: ${{ github.workspace }}/bin/deployment
             deliverables: 'app-test.yml'
