@@ -1,12 +1,12 @@
 name: CI
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -18,6 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     # we want to be notified of vulnerabilities but don't want them to block development
     continue-on-error: true
+    environment: CI
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -27,11 +28,10 @@ jobs:
       # Runs a single command using the runners shell
       - name: Audit NPM packages ✔🕵️‍♀️
         # only fails the audit if the results include a vulnerability with a level of moderate or higher
-        run: npm audit --audit-level=moderate
-  build-and-deploy:
+        run: npm audit --audit-level=moderate &> ${{ secrets.SENSITIVE_LOG_CAPTURE_FILE }}
+  build-test:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    environment: deploy-test
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -47,12 +47,27 @@ jobs:
           cd bin/deployment
           mv eggx-external/ www/
           echo "Build ready for deployment at $(pwd)"
-      - name: Set up Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@master
+      - name: Upload deployment artifacts
+        uses: actions/upload-artifact@v2
         with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          name: deployment-artifacts
+          path: bin/deployment
+  deploy-test:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    environment: deploy-test
+    needs: [build-test]
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v2 # required for GITHUB_WORKSPACE env var
+      - name: Download deployment artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: deployment-artifacts
+          path: bin/deployment
       - name: Deploy test app to GAE ✈
-        run: |
-          cd bin/deployment
-          gcloud app deploy app-test.yml
+        uses: google-github-actions/deploy-appengine@v0.3.0
+        with:
+          credentials: ${{ secrets.GCP_SA_KEY }}
+          working_directory: ${{ github.workspace }}/bin/deployment
+          deliverables: "app-test.yml"
