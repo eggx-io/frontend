@@ -66,10 +66,10 @@ jobs:
           name: deployment-artifacts
       - name: test-tree
         run: |
-          tree .
+          ls -R
       - name: Deploy test app to GAE ✈
         uses: google-github-actions/deploy-appengine@v0.3.0
         with:
             credentials: ${{ secrets.GCP_SA_KEY }}
-            working_directory: ${{ github.workspace }}/bin/deployment
+            working_directory: ${{ github.workspace }}/deployment-artifacts
             deliverables: 'app-test.yml'
