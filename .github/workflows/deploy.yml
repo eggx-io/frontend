@@ -1,20 +1,19 @@
 name: Deploy 🚀
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ master ]
+    branches: [master]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build-and-deploy:
+  build-prod:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    environment: deploy
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -26,16 +25,31 @@ jobs:
         run: |
           npx ng build --prod
           mkdir -p bin/deployment
-          cp -r app.yaml dist/eggx-external/ bin/deployment/
+          cp -r app.yml dist/eggx-external/ bin/deployment/
           cd bin/deployment
           mv eggx-external/ www/
           echo "Build ready for deployment at $(pwd)"
-      - name: Set up Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@master
+      - name: Upload deployment artifacts
+        uses: actions/upload-artifact@v2
         with:
-          project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_SA_KEY }}
-      - name: Deploy test app to GAE 🚀
-        run: |
-          cd bin/deployment
-          gcloud app deploy app.yaml
+          name: deployment-artifacts
+          path: bin/deployment
+  deploy-prod:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    environment: deploy-test
+    needs: [build-prod]
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v2 # required for GITHUB_WORKSPACE env var
+      - name: Download deployment artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: deployment-artifacts
+          path: bin/deployment
+      - name: Deploy app to GAE 🚀
+        uses: google-github-actions/deploy-appengine@v0.3.0
+        with:
+          credentials: ${{ secrets.GCP_SA_KEY }}
+          working_directory: ${{ github.workspace }}/bin/deployment
+          deliverables: "app.yml"

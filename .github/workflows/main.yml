@@ -1,12 +1,12 @@
 name: CI
 
-# Controls when the action will run. 
+# Controls when the action will run.
 on:
   # Triggers the workflow on push or pull request events but only for the main branch
   push:
-    branches: [ master ]
+    branches: [master]
   pull_request:
-    branches: [ master ]
+    branches: [master]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -65,12 +65,9 @@ jobs:
         with:
           name: deployment-artifacts
           path: bin/deployment
-      - name: test-tree
-        run: |
-          ls -R
       - name: Deploy test app to GAE ✈
         uses: google-github-actions/deploy-appengine@v0.3.0
         with:
-            credentials: ${{ secrets.GCP_SA_KEY }}
-            working_directory: ${{ github.workspace }}/bin/deployment
-            deliverables: 'app-test.yml'
+          credentials: ${{ secrets.GCP_SA_KEY }}
+          working_directory: ${{ github.workspace }}/bin/deployment
+          deliverables: "app-test.yml"
