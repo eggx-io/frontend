@@ -64,6 +64,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: deployment-artifacts
+      - name: test-tree
+        run: |
+          tree .
       - name: Deploy test app to GAE ✈
         uses: google-github-actions/deploy-appengine@v0.3.0
         with:
